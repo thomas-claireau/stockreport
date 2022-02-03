@@ -1,0 +1,8 @@
+{
+	"summary": {
+		"Evaluation totale :": "sum",
+		"Valeur veille": "yesterday_sum",
+		"Solde espèce": "rest",
+		"+/- values/PRU :": "diff_pru"
+	}
+}

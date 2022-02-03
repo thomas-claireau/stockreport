@@ -1,0 +1,14 @@
+html
+  head
+    title Scraped Headless Browser Resources
+  body
+    h1 Latest Headless Browser Resources
+
+    h3 ETF
+    ul
+      for etf in data.etfs
+        li
+          if etf.title
+            a(href=`${etf.title}` target='_blank')= `${etf.title}`
+          else
+            a(href=`${etf.link}` target='_blank')= `${etf.link}`
