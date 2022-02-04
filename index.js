@@ -7,8 +7,6 @@ import Summary from './scraper/Summary.js';
 
 const app = express();
 
-app.set('view engine', 'pug');
-
 puppeteer.launch().then(async function (browser) {
 	const [page] = await browser.pages();
 
