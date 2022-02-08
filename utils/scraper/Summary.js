@@ -1,6 +1,6 @@
 'use strict';
 
-import translator from '../utils/translator.js';
+import translator from '../translator.js';
 
 export default class Summary {
 	constructor(page) {
