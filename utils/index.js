@@ -3,7 +3,7 @@ import 'dotenv/config';
 import express from 'express';
 import puppeteer from 'puppeteer';
 import { login } from './utils/scraper/functions.js.js';
-import Summary from './utils/scraper/Summary.js';
+import Summary from './scraper/Summary.js';
 
 const app = express();
 
