@@ -21,10 +21,10 @@ module.exports = {
 				type: Sequelize.INTEGER,
 			},
 			price: {
-				type: Sequelize.INTEGER,
+				type: Sequelize.FLOAT,
 			},
 			fee: {
-				type: Sequelize.INTEGER,
+				type: Sequelize.FLOAT,
 			},
 			type: {
 				type: Sequelize.INTEGER,
@@ -32,6 +32,9 @@ module.exports = {
 				onDelete: 'CASCADE',
 				onUpdate: 'CASCADE',
 				allowNull: false,
+			},
+			etf: {
+				type: Sequelize.BOOLEAN,
 			},
 			createdAt: {
 				allowNull: false,

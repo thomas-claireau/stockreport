@@ -17,14 +17,15 @@ module.exports = (sequelize, DataTypes) => {
 			isin: DataTypes.STRING,
 			code: DataTypes.STRING,
 			qty: DataTypes.INTEGER,
-			price: DataTypes.INTEGER,
-			fee: DataTypes.INTEGER,
+			price: DataTypes.FLOAT,
+			fee: DataTypes.FLOAT,
 			type: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 				onDelete: 'CASCADE',
 				onUpdate: 'CASCADE',
 			},
+			etf: DataTypes.BOOLEAN,
 		},
 		{
 			sequelize,
