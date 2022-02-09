@@ -18,7 +18,7 @@ const hpp = require('hpp');
 const app = express();
 
 // Routes Imports
-const summaries = require('./routes/summaries.route');
+const summary = require('./routes/summary.route');
 
 // Helmet middlware for safe headers
 app.use(helmet());
@@ -61,6 +61,6 @@ if (ENV == 'development') {
 }
 
 // Setting routes
-app.use('/summaries', summaries);
+app.use('/summary', summary);
 
 module.exports = app;
