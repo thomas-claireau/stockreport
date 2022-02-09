@@ -1,33 +1,52 @@
-const express = require('express');
-const cors = require('cors');
-const app = express();
-const db = require('./models');
+// Imports
+const http = require('http');
+const app = require('./app');
 
-const cmd = require('node-cmd');
+//  Setting the port
+const normalizePort = (val) => {
+	const port = parseInt(val, 10);
 
-const PORT = process.env.PORT || 3000;
-const ENV = process.env.NODE_ENV || 'development';
-
-const corsOptions = {
-	origin: 'http://localhost:' + PORT,
+	if (isNaN(port)) {
+		return val;
+	}
+	if (port >= 0) {
+		return port;
+	}
+	return false;
 };
 
-if (ENV == 'development') {
-	db.sequelize.sync({ force: true }).then(() => {
-		cmd.run('sequelize db:seed:all');
-	});
-} else {
-	db.sequelize.sync();
-}
+const port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
 
-app.use(cors(corsOptions));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Error endelling
+const errorHandler = (error) => {
+	if (error.syscall !== 'listen') {
+		throw error;
+	}
+	const address = server.address();
+	const bind =
+		typeof address === 'string' ? 'pipe ' + address : 'port: ' + port;
+	switch (error.code) {
+		case 'EACCES':
+			console.error(bind + ' requires elevated privileges.');
+			process.exit(1);
+			break;
+		case 'EADDRINUSE':
+			console.error(bind + ' is already in use.');
+			process.exit(1);
+			break;
+		default:
+			throw error;
+	}
+};
 
-app.get('/', (req, res) => {
-	res.json({ message: 'Welcome' });
+// Redirecting the server process to Express app
+const server = http.createServer(app);
+server.on('error', errorHandler);
+server.on('listening', () => {
+	const address = server.address();
+	const bind =
+		typeof address === 'string' ? 'pipe ' + address : 'port ' + port;
+	console.log('Listening on ' + bind);
 });
-
-app.listen(PORT, () => {
-	console.log(`Server is running on port ${PORT}.`);
-});
+server.listen(port);
