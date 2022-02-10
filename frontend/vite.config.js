@@ -7,4 +7,16 @@ export default defineConfig({
 	server: {
 		port: 4000,
 	},
+	css: {
+		preprocessorOptions: {
+			scss: {
+				additionalData: `
+					@import "./src/styles/variables";
+					@import "./src/styles/reset";
+					@import "./src/styles/fonts";
+					@import "./src/styles/global";
+				`,
+			},
+		},
+	},
 });
