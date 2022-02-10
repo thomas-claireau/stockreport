@@ -13,8 +13,15 @@ html {
 
 body {
 	font-family: 'Nunito', sans-serif;
+	background-color: $bs-body-bg;
 
 	@media screen and (max-width: $break-tablet) {
 		overflow-x: hidden;
+	}
+}
+
+:global {
+	.container {
+		padding: 20px;
 	}
 }
