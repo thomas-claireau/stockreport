@@ -9,6 +9,13 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// define association here
+			models.Stock.belongsTo(models.StockType, {
+				foreignKey: {
+					allowNull: false,
+				},
+				onUpdate: 'CASCADE',
+				onDelete: 'CASCADE',
+			});
 		}
 	}
 	Stock.init(
@@ -36,12 +43,6 @@ module.exports = (sequelize, DataTypes) => {
 			fee: {
 				type: DataTypes.FLOAT,
 				allowNull: false,
-			},
-			type: {
-				type: DataTypes.INTEGER,
-				allowNull: false,
-				onDelete: 'CASCADE',
-				onUpdate: 'CASCADE',
 			},
 			etf: {
 				type: DataTypes.BOOLEAN,

@@ -26,13 +26,6 @@ module.exports = {
 			fee: {
 				type: Sequelize.FLOAT,
 			},
-			type: {
-				type: Sequelize.INTEGER,
-				references: { model: 'stockTypes', key: 'id' },
-				onDelete: 'CASCADE',
-				onUpdate: 'CASCADE',
-				allowNull: false,
-			},
 			etf: {
 				type: Sequelize.BOOLEAN,
 			},

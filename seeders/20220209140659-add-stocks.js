@@ -18,7 +18,7 @@ module.exports = {
 					name: faker.finance.currencyName(),
 					isin: 'FR00001234',
 					code: 'PAASI',
-					type: faker.datatype.number({ min: 1, max: 4 }),
+					StockTypeId: faker.datatype.number({ min: 1, max: 4 }),
 					qty: faker.datatype.number({ min: 1, max: 50 }),
 					price: faker.datatype.float({ min: 0, max: 200 }),
 					fee: faker.datatype.float({ min: 0, max: 10 }),

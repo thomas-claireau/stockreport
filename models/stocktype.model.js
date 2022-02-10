@@ -9,11 +9,7 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// define association here
-			StockType.hasOne(models.Stock, {
-				foreignKey: 'type',
-				as: 'Stocks',
-				onDelete: 'CASCADE',
-			});
+			StockType.hasOne(models.Stock);
 		}
 	}
 	StockType.init(
