@@ -26,6 +26,7 @@ Date.prototype.toJSON = function () {
 const summaries = require('./routes/summary.route');
 const movements = require('./routes/movement.route');
 const stocks = require('./routes/stock.route');
+const stockTypes = require('./routes/stockType.route');
 
 // Helmet middlware for safe headers
 app.use(helmet());
@@ -71,5 +72,6 @@ if (ENV == 'development') {
 app.use('/summaries', summaries);
 app.use('/movements', movements);
 app.use('/stocks', stocks);
+app.use('/stock-types', stockTypes);
 
 module.exports = app;
