@@ -13,19 +13,40 @@ module.exports = (sequelize, DataTypes) => {
 	}
 	Stock.init(
 		{
-			name: DataTypes.STRING,
-			isin: DataTypes.STRING,
-			code: DataTypes.STRING,
-			qty: DataTypes.INTEGER,
-			price: DataTypes.FLOAT,
-			fee: DataTypes.FLOAT,
+			name: {
+				type: DataTypes.STRING,
+				allowNull: false,
+			},
+			isin: {
+				type: DataTypes.STRING,
+				allowNull: false,
+			},
+			code: {
+				type: DataTypes.STRING,
+				allowNull: false,
+			},
+			qty: {
+				type: DataTypes.INTEGER,
+				allowNull: false,
+			},
+			price: {
+				type: DataTypes.FLOAT,
+				allowNull: false,
+			},
+			fee: {
+				type: DataTypes.FLOAT,
+				allowNull: false,
+			},
 			type: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 				onDelete: 'CASCADE',
 				onUpdate: 'CASCADE',
 			},
-			etf: DataTypes.BOOLEAN,
+			etf: {
+				type: DataTypes.BOOLEAN,
+				allowNull: false,
+			},
 		},
 		{
 			sequelize,

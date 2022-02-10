@@ -13,7 +13,10 @@ module.exports = (sequelize, DataTypes) => {
 	}
 	Summary.init(
 		{
-			value: DataTypes.FLOAT,
+			value: {
+				type: DataTypes.FLOAT,
+				allowNull: false,
+			},
 		},
 		{
 			sequelize,

@@ -13,7 +13,10 @@ module.exports = (sequelize, DataTypes) => {
 	}
 	Movement.init(
 		{
-			amount: DataTypes.FLOAT,
+			amount: {
+				type: DataTypes.FLOAT,
+				allowNull: false,
+			},
 		},
 		{
 			sequelize,
