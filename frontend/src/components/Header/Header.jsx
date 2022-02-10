@@ -1,4 +1,4 @@
-import avatar from '../assets/img/avatar.jpg';
+import avatar from '../../assets/img/avatar.jpg';
 import style from './Header.module.scss';
 
 export default function Header() {
