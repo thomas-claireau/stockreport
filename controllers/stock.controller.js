@@ -17,14 +17,24 @@ exports.create = (req, res) => {
 
 // Retrieve all Stocks from the database.
 exports.findAll = (req, res) => {
-	models.Stock.findAll()
-		.then((summaries) => {
-			if (summaries.length <= 0)
+	models.Stock.findAll({
+		attributes: {
+			exclude: ['StockTypeId'],
+		},
+		include: [
+			{
+				model: models.StockType,
+				attributes: ['name'],
+			},
+		],
+	})
+		.then((stocks) => {
+			if (stocks.length <= 0)
 				return res
 					.status(404)
 					.json({ message: "Aucun actif n'a été trouvé" });
 
-			return res.status(200).json(summaries);
+			return res.status(200).json(stocks);
 		})
 		.catch((err) => res.status(501).json(err));
 };
@@ -33,6 +43,15 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
 	models.Stock.findOne({
 		where: { id: req.params.id },
+		attributes: {
+			exclude: ['StockTypeId'],
+		},
+		include: [
+			{
+				model: models.StockType,
+				attributes: ['name'],
+			},
+		],
 	})
 		.then((stock) => {
 			if (!stock)
