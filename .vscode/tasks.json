@@ -1,0 +1,49 @@
+{
+	"version": "2.0.0",
+
+	"tasks": [
+		{
+			"label": "new react folder and files",
+
+			"command": [
+				"rm -rf ${config:defaultPath}${input:dirName}",
+				"&& mkdir ${config:defaultPath}${input:dirName}",
+				"&& touch ${config:defaultPath}${input:dirName}/${input:dirName}.jsx",
+				"&& touch ${config:defaultPath}${input:dirName}/${input:dirName}.module.scss",
+
+				// write in jsx file
+				"&& echo \"import style from './${input:dirName}.module.scss'; \" >> ${config:defaultPath}${input:dirName}/${input:dirName}.jsx", // import module scss
+				"&& echo \"\" >> ${config:defaultPath}${input:dirName}/${input:dirName}.jsx",
+				"&& echo \"export default function ${input:dirName}() { return (\" >> ${config:defaultPath}${input:dirName}/${input:dirName}.jsx", // export default function
+				"&& echo \"<div className={style}>\" >> ${config:defaultPath}${input:dirName}/${input:dirName}.jsx", // <div className={style}>
+				"&& echo \"</div>\" >> ${config:defaultPath}${input:dirName}/${input:dirName}.jsx", // </div>
+				"&& echo \"); }\" >> ${config:defaultPath}${input:dirName}/${input:dirName}.jsx", // </div>
+
+				// write in module scss
+				"&& echo \".${input:dirName}{}\" >> ${config:defaultPath}${input:dirName}/${input:dirName}.module.scss"
+			],
+
+			"type": "shell",
+			"problemMatcher": [],
+			"presentation": {
+				"echo": false,
+				"reveal": "silent",
+				"focus": false,
+				"panel": "shared",
+				"showReuseMessage": false,
+				"clear": true
+			}
+		}
+	],
+
+	// ........................................................................................
+
+	"inputs": [
+		{
+			"type": "promptString",
+			"id": "dirName",
+			"description": "Complete my folder name",
+			"default": "jsx folder to create"
+		}
+	]
+}
