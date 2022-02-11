@@ -15,16 +15,16 @@ exports.create = (req, res) => {
 		.catch((err) => res.status(501).json(err));
 };
 
-// Retrieve all Summaries from the database.
+// Retrieve all Movements from the database.
 exports.findAll = (req, res) => {
 	models.Movement.findAll()
-		.then((summaries) => {
-			if (summaries.length <= 0)
+		.then((movements) => {
+			if (movements.length <= 0)
 				return res
 					.status(404)
 					.json({ message: "Aucun mouvement n'a été trouvé" });
 
-			return res.status(200).json(summaries);
+			return res.status(200).json(movements);
 		})
 		.catch((err) => res.status(501).json(err));
 };
