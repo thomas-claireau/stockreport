@@ -16,7 +16,8 @@ module.exports = {
 				{
 					amount:
 						faker.datatype.float({ min: 300, max: 600 }) *
-						(faker.datatype.number({ min: 0, max: 1 }) ? 1 : -1),
+						(faker.datatype.number({ min: 0, max: 1 }) ? 1 : -1) *
+						100,
 					createdAt: dateString,
 					updatedAt: dateString,
 				},
