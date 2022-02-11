@@ -16,10 +16,6 @@ module.exports = {
 				type: Sequelize.FLOAT,
 				allowNull: false,
 			},
-			pru: {
-				type: Sequelize.FLOAT,
-				allowNull: false,
-			},
 			rest: {
 				type: Sequelize.FLOAT,
 				allowNull: false,

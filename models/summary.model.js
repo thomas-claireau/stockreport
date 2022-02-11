@@ -21,10 +21,6 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.FLOAT,
 				allowNull: false,
 			},
-			pru: {
-				type: DataTypes.FLOAT,
-				allowNull: false,
-			},
 			rest: {
 				type: DataTypes.FLOAT,
 				allowNull: false,
