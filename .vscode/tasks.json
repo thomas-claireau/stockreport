@@ -15,7 +15,7 @@
 				"&& echo \"import style from './${input:dirName}.module.scss'; \" >> ${config:defaultPath}${input:dirName}/${input:dirName}.jsx", // import module scss
 				"&& echo \"\" >> ${config:defaultPath}${input:dirName}/${input:dirName}.jsx",
 				"&& echo \"export default function ${input:dirName}() { return (\" >> ${config:defaultPath}${input:dirName}/${input:dirName}.jsx", // export default function
-				"&& echo \"<div className={style}>\" >> ${config:defaultPath}${input:dirName}/${input:dirName}.jsx", // <div className={style}>
+				"&& echo \"<div className={style['${input:dirName}']}>\" >> ${config:defaultPath}${input:dirName}/${input:dirName}.jsx", // <div className={style}>
 				"&& echo \"</div>\" >> ${config:defaultPath}${input:dirName}/${input:dirName}.jsx", // </div>
 				"&& echo \"); }\" >> ${config:defaultPath}${input:dirName}/${input:dirName}.jsx", // </div>
 
