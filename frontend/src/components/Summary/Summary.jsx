@@ -3,7 +3,7 @@ import style from './Summary.module.scss';
 
 export default function Summary() {
 	return (
-		<section className={style['Summary']}>
+		<div className={style['Summary']}>
 			<Card
 				label="Evaluation totale"
 				value={366056}
@@ -11,6 +11,6 @@ export default function Summary() {
 			/>
 			<Card label="Solde espèces" value={86709} valueLastMonth={8670} />
 			<Card label="Valorisation PRU" value={235} valueLastMonth={235} />
-		</section>
+		</div>
 	);
 }

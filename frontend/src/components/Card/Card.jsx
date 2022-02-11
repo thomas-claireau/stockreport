@@ -6,7 +6,7 @@ export default function Card({ label, value, valueLastMonth }) {
 		<div className={style['Card']}>
 			<div>
 				<h5>{label}</h5>
-				<span className="h3">{renderPrice(value)}</span>
+				<span className="h4">{renderPrice(value)}</span>
 			</div>
 			<Evolution value={renderDiff(value, valueLastMonth)} type="%" />
 		</div>
