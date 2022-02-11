@@ -35,18 +35,18 @@ $bs-warning: #ffbc00;
 $bs-danger: #fa5c7c;
 $bs-light: #464f5b;
 $bs-dark: #f1f1f1;
-$bs-primary-rgb: 114, 124, 245;
-$bs-secondary-rgb: 206, 212, 218;
-$bs-success-rgb: 10, 207, 151;
-$bs-info-rgb: 57, 175, 209;
-$bs-warning-rgb: 255, 188, 0;
-$bs-danger-rgb: 250, 92, 124;
-$bs-light-rgb: 70, 79, 91;
-$bs-dark-rgb: 241, 241, 241;
-$bs-white-rgb: 255, 255, 255;
-$bs-black-rgb: 0, 0, 0;
-$bs-body-color-rgb: 170, 184, 197;
-$bs-body-bg-rgb: 52, 58, 64;
+$bs-primary-rgb: rgb(114, 124, 245);
+$bs-secondary-rgb: rgb(206, 212, 218);
+$bs-success-rgb: rgb(10, 207, 151);
+$bs-info-rgb: rgb(57, 175, 209);
+$bs-warning-rgb: rgb(255, 188, 0);
+$bs-danger-rgb: rgb(250, 92, 124);
+$bs-light-rgb: rgb(70, 79, 91);
+$bs-dark-rgb: rgb(241, 241, 241);
+$bs-white-rgb: rgb(255, 255, 255);
+$bs-black-rgb: rgb(0, 0, 0);
+$bs-body-color-rgb: rgb(170, 184, 197);
+$bs-body-bg-rgb: rgb(52, 58, 64);
 $bs-gradient: linear-gradient(
 	180deg,
 	rgba(255, 255, 255, 0.15),
