@@ -17,11 +17,6 @@ const hpp = require('hpp');
 // Express app launching
 const app = express();
 
-// fix timezone when read date from database
-Date.prototype.toJSON = function () {
-	return this.toLocaleString();
-};
-
 // Routes Imports
 const movements = require('./routes/movement.route');
 const stocks = require('./routes/stock.route');
