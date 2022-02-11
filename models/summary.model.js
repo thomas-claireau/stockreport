@@ -13,7 +13,19 @@ module.exports = (sequelize, DataTypes) => {
 	}
 	Summary.init(
 		{
-			value: {
+			sum: {
+				type: DataTypes.FLOAT,
+				allowNull: false,
+			},
+			yesterday_sum: {
+				type: DataTypes.FLOAT,
+				allowNull: false,
+			},
+			pru: {
+				type: DataTypes.FLOAT,
+				allowNull: false,
+			},
+			rest: {
 				type: DataTypes.FLOAT,
 				allowNull: false,
 			},

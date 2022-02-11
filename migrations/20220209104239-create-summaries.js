@@ -8,8 +8,21 @@ module.exports = {
 				primaryKey: true,
 				type: Sequelize.INTEGER,
 			},
-			value: {
+			sum: {
 				type: Sequelize.FLOAT,
+				allowNull: false,
+			},
+			yesterday_sum: {
+				type: Sequelize.FLOAT,
+				allowNull: false,
+			},
+			pru: {
+				type: Sequelize.FLOAT,
+				allowNull: false,
+			},
+			rest: {
+				type: Sequelize.FLOAT,
+				allowNull: false,
 			},
 			createdAt: {
 				allowNull: false,
