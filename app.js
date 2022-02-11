@@ -23,7 +23,6 @@ Date.prototype.toJSON = function () {
 };
 
 // Routes Imports
-const summaries = require('./routes/summary.route');
 const movements = require('./routes/movement.route');
 const stocks = require('./routes/stock.route');
 const stockTypes = require('./routes/stockType.route');
@@ -69,7 +68,6 @@ if (ENV == 'development') {
 }
 
 // Setting routes
-app.use('/summaries', summaries);
 app.use('/movements', movements);
 app.use('/stocks', stocks);
 app.use('/stock-types', stockTypes);
