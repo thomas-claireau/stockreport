@@ -17,7 +17,17 @@ exports.create = (req, res) => {
 
 // Retrieve all Movements from the database.
 exports.findAll = (req, res) => {
-	models.Movement.findAll()
+	models.Movement.findAll({
+		attributes: {
+			exclude: ['MovementTypeId'],
+		},
+		include: [
+			{
+				model: models.MovementType,
+				attributes: ['name'],
+			},
+		],
+	})
 		.then((movements) => {
 			if (movements.length <= 0)
 				return res

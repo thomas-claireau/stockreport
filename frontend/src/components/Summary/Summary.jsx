@@ -1,7 +1,12 @@
+import { useApiContext } from '../../ApiContext';
 import Card from '../Card/Card';
 import style from './Summary.module.scss';
 
 export default function Summary() {
+	const { movements } = useApiContext();
+
+	console.log(movements);
+
 	return (
 		<div className={style['Summary']}>
 			<Card
