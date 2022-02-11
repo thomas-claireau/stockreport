@@ -36,16 +36,16 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 			},
-			price: {
-				type: DataTypes.FLOAT,
-				allowNull: false,
-			},
-			fee: {
-				type: DataTypes.FLOAT,
-				allowNull: false,
-			},
 			etf: {
 				type: DataTypes.BOOLEAN,
+				allowNull: false,
+			},
+			pru: {
+				type: DataTypes.FLOAT,
+				allowNull: false,
+			},
+			live: {
+				type: DataTypes.FLOAT,
 				allowNull: false,
 			},
 		},

@@ -24,16 +24,16 @@ module.exports = {
 				type: Sequelize.INTEGER,
 				allowNull: false,
 			},
-			price: {
-				type: Sequelize.FLOAT,
-				allowNull: false,
-			},
-			fee: {
-				type: Sequelize.FLOAT,
-				allowNull: false,
-			},
 			etf: {
 				type: Sequelize.BOOLEAN,
+				allowNull: false,
+			},
+			pru: {
+				type: Sequelize.FLOAT,
+				allowNull: false,
+			},
+			live: {
+				type: Sequelize.FLOAT,
 				allowNull: false,
 			},
 			createdAt: {
