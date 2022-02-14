@@ -16,6 +16,8 @@ module.exports = (sequelize, DataTypes) => {
 				onUpdate: 'CASCADE',
 				onDelete: 'CASCADE',
 			});
+
+			Stock.hasOne(models.Report);
 		}
 	}
 	Stock.init(
@@ -41,10 +43,6 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 			},
 			pru: {
-				type: DataTypes.FLOAT,
-				allowNull: false,
-			},
-			live: {
 				type: DataTypes.FLOAT,
 				allowNull: false,
 			},

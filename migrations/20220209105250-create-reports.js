@@ -1,34 +1,14 @@
 'use strict';
 module.exports = {
 	async up(queryInterface, Sequelize) {
-		await queryInterface.createTable('Stocks', {
+		await queryInterface.createTable('Reports', {
 			id: {
 				allowNull: false,
 				autoIncrement: true,
 				primaryKey: true,
 				type: Sequelize.INTEGER,
 			},
-			name: {
-				type: Sequelize.STRING,
-				allowNull: false,
-			},
-			isin: {
-				type: Sequelize.STRING,
-				allowNull: false,
-			},
-			code: {
-				type: Sequelize.STRING,
-				allowNull: false,
-			},
-			qty: {
-				type: Sequelize.INTEGER,
-				allowNull: false,
-			},
-			etf: {
-				type: Sequelize.BOOLEAN,
-				allowNull: false,
-			},
-			pru: {
+			amount: {
 				type: Sequelize.FLOAT,
 				allowNull: false,
 			},
@@ -43,6 +23,6 @@ module.exports = {
 		});
 	},
 	async down(queryInterface, Sequelize) {
-		await queryInterface.dropTable('Stocks');
+		await queryInterface.dropTable('Reports');
 	},
 };

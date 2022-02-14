@@ -13,8 +13,6 @@ module.exports = {
 			);
 			const dateString = date.toISOString().substring(0, 10);
 
-			const pru = faker.datatype.float({ min: 0, max: 200 }) * 100;
-
 			await queryInterface.bulkInsert('Stocks', [
 				{
 					name: faker.finance.currencyName(),
@@ -23,8 +21,7 @@ module.exports = {
 					StockTypeId: faker.datatype.number({ min: 1, max: 4 }),
 					qty: faker.datatype.number({ min: 1, max: 50 }),
 					etf: faker.datatype.number({ min: 0, max: 1 }),
-					pru,
-					live: pru + faker.datatype.number({ min: 0, max: 100 }),
+					pru: faker.datatype.float({ min: 0, max: 200 }) * 100,
 					createdAt: dateString,
 					updatedAt: dateString,
 				},
