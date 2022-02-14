@@ -30,7 +30,6 @@ exports.findAll = (req, res) => {
 		order: [['updatedAt', 'DESC']],
 	})
 		.then((reports) => {
-			console.log(reports.length);
 			if (reports.length <= 0)
 				return res
 					.status(404)

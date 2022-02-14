@@ -1,9 +1,12 @@
 import { useApiContext } from '../../ApiContext';
+import { sum } from '../../utils/functions';
 import Card from '../Card/Card';
 import style from './Summary.module.scss';
 
 export default function Summary() {
 	const { movements, reports } = useApiContext();
+
+	console.log(reports);
 
 	return (
 		<div className={style['Summary']}>
@@ -88,8 +91,4 @@ function getPreviousValorisation(reports) {
 	);
 
 	return live - pru;
-}
-
-function sum(values) {
-	return values.reduce((acc, cur) => acc + cur, 0);
 }
