@@ -3,7 +3,7 @@ import Card from '../Card/Card';
 import style from './Summary.module.scss';
 
 export default function Summary() {
-	const { movements, stocks } = useApiContext();
+	const { movements, reports } = useApiContext();
 
 	return (
 		<div className={style['Summary']}>
@@ -19,8 +19,8 @@ export default function Summary() {
 			/>
 			<Card
 				label="Valorisation PRU"
-				value={getValorisation(stocks)}
-				lastValue={235}
+				value={getValorisation(reports)}
+				lastValue={getPreviousValorisation(reports)}
 			/>
 		</div>
 	);
@@ -58,24 +58,34 @@ function getPreviousReport(movements, type) {
 /**
  * Calcul valorisation PRU = (Somme actifs en cours) - (Somme actifs à l'achat)
  */
-function getValorisation(stocks) {
-	const live = sum(stocks.map((stock) => stock.live * stock.qty));
-	const pru = sum(stocks.map((stock) => stock.pru * stock.qty));
+function getValorisation(reports) {
+	const live = sum(reports.map((report) => report.amount * report.Stock.qty));
+	const pru = sum(
+		reports.map((report) => report.Stock.qty * report.Stock.qty)
+	);
 
 	return live - pru;
 }
 
-function getPreviousValorisation(stocks) {
+function getPreviousValorisation(reports) {
 	const lastMonth = new Date();
 	lastMonth.setMonth(lastMonth.getMonth() - 1);
 
 	const live = sum(
-		stocks.map((stock) => {
-			return stock.live * stock.qty;
+		reports.map((report) => {
+			if (new Date(report.updatedAt) < lastMonth) {
+				return report.amount * report.Stock.qty;
+			}
 		})
 	);
 
-	const pru = sum(stocks.map((stock) => stock.pru * stock.qty));
+	const pru = sum(
+		reports.map((report) => {
+			if (new Date(report.updatedAt) < lastMonth) {
+				return report.Stock.pru * report.Stock.qty;
+			}
+		})
+	);
 
 	return live - pru;
 }

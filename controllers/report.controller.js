@@ -24,7 +24,7 @@ exports.findAll = (req, res) => {
 		include: [
 			{
 				model: models.Stock,
-				attributes: ['id', 'pru'],
+				attributes: ['id', 'pru', 'qty'],
 			},
 		],
 		order: [['updatedAt', 'DESC']],
