@@ -27,6 +27,7 @@ exports.findAll = (req, res) => {
 				attributes: ['name'],
 			},
 		],
+		order: [['updatedAt', 'DESC']],
 	})
 		.then((movements) => {
 			if (movements.length <= 0)

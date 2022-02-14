@@ -5,17 +5,52 @@ import style from './Summary.module.scss';
 export default function Summary() {
 	const { movements } = useApiContext();
 
-	console.log(movements);
-
 	return (
 		<div className={style['Summary']}>
 			<Card
 				label="Evaluation totale"
-				value={366056}
-				valueLastMonth={366056}
+				value={getActualReport(movements, 'purchase')}
+				lastValue={getPreviousReport(movements, 'purchase')}
 			/>
-			<Card label="Solde espèces" value={86709} valueLastMonth={8670} />
-			<Card label="Valorisation PRU" value={235} valueLastMonth={235} />
+			<Card
+				label="Solde espèces"
+				value={getActualReport(movements, 'transfer')}
+				lastValue={getPreviousReport(movements, 'transfer')}
+			/>
+			<Card label="Valorisation PRU" value={235} lastValue={235} />
 		</div>
 	);
+}
+
+function getActualReport(movements, type) {
+	return sum(
+		movements.map((movement) => {
+			if (movement.MovementType.name == type) {
+				return movement.amount;
+			}
+
+			return false;
+		})
+	);
+}
+
+function getPreviousReport(movements, type) {
+	const lastMonth = new Date();
+	lastMonth.setMonth(lastMonth.getMonth() - 1);
+
+	return sum(
+		movements.map((movement) => {
+			if (movement.MovementType.name == type) {
+				if (new Date(movement.updatedAt) < lastMonth) {
+					return movement.amount;
+				}
+			}
+
+			return false;
+		})
+	);
+}
+
+function sum(values) {
+	return values.reduce((acc, cur) => acc + cur, 0);
 }
