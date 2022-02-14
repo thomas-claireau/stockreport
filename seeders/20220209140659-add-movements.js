@@ -2,14 +2,25 @@
 
 const faker = require('@faker-js/faker').faker;
 
+const MONTHS = 2; // tests on 2 months
+const WEEKS = 4; // weeks in a month
+const DAYS = 5; // 5 days per weeks
+const HOURS = 10; // 10 hours per day (8h-18h)
+const STEPS = 2; // number of movements per hour;
+
+const MOVEMENTS = MONTHS * WEEKS * DAYS * HOURS * STEPS;
+
 module.exports = {
 	async up(queryInterface, Sequelize) {
 		const movements = [];
 
-		for (let i = 0; i < 25; i++) {
+		for (let i = 0; i < MOVEMENTS; i++) {
 			const date = new Date();
+			const randomDate = faker.datatype.datetime();
+			const time = `${randomDate.getHours()}:${randomDate.getMinutes()}:${randomDate.getSeconds()}`;
+
 			date.setDate(
-				date.getDate() - faker.datatype.number({ min: i, max: 25 })
+				date.getDate() - faker.datatype.number({ min: i, max: MOVEMENTS })
 			);
 			const dateString = date.toISOString().substring(0, 10);
 
@@ -19,8 +30,8 @@ module.exports = {
 					faker.datatype.float({ min: 300, max: 600 }) *
 					(faker.datatype.number({ min: 0, max: 1 }) ? 1 : -1) *
 					100,
-				createdAt: dateString,
-				updatedAt: dateString,
+				createdAt: dateString + ' ' + time,
+				updatedAt: dateString + ' ' + time,
 			};
 
 			if (isTransfer) {
