@@ -19,6 +19,7 @@ const app = express();
 
 // Routes Imports
 const movements = require('./routes/movement.route');
+const reports = require('./routes/report.route');
 const stocks = require('./routes/stock.route');
 const stockTypes = require('./routes/stockType.route');
 
@@ -64,6 +65,7 @@ if (ENV == 'development') {
 
 // Setting routes
 app.use('/movements', movements);
+app.use('/reports', reports);
 app.use('/stocks', stocks);
 app.use('/stock-types', stockTypes);
 
