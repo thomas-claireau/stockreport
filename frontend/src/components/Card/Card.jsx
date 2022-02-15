@@ -6,15 +6,11 @@ export default function Card({ label, value, lastValue }) {
 		<div className={style['Card']}>
 			<div>
 				<h5>{label}</h5>
-				<span className="h4">{renderPrice(value)}</span>
+				<span className="h4">{value.toFixed(2)} €</span>
 			</div>
 			<Evolution value={renderDiff(value, lastValue)} type="%" />
 		</div>
 	);
-}
-
-function renderPrice(cent) {
-	return (cent / 100).toFixed(2) + ' €';
 }
 
 function renderDiff(actual, last) {

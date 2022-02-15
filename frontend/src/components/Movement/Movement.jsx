@@ -30,6 +30,13 @@ const options = {
 		legend: {
 			display: false,
 		},
+		tooltip: {
+			callbacks: {
+				label: function ({ formattedValue }) {
+					return formattedValue + '€';
+				},
+			},
+		},
 	},
 	scales: {
 		x: {
@@ -81,11 +88,17 @@ function getData(data, scale) {
 
 	for (const key in transfers) {
 		if (Object.hasOwnProperty.call(transfers, key)) {
-			const value = sum(transfers[key].map((transfer) => transfer.amount));
+			const value = sum(
+				transfers[key].map((transfer) => transfer.amount.euro)
+			).toFixed(2);
 
 			dataset[0].data.push({
 				x: key,
 				y: value,
+				label: 'cc',
+				Tooltip: {
+					value: value + ' €',
+				},
 			});
 
 			// set colors

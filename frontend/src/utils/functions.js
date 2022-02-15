@@ -8,3 +8,10 @@ export function groupBy(xs, key) {
 		return rv;
 	}, {});
 }
+
+export function formatPrice(cent) {
+	return {
+		euro: Number(cent / 100),
+		cent,
+	};
+}

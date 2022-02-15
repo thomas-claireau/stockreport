@@ -31,7 +31,7 @@ function getActualReport(movements, type) {
 	return sum(
 		movements.map((movement) => {
 			if (movement.MovementType.name == type) {
-				return movement.amount;
+				return movement.amount.euro;
 			}
 
 			return false;
@@ -47,7 +47,7 @@ function getPreviousReport(movements, type) {
 		movements.map((movement) => {
 			if (movement.MovementType.name == type) {
 				if (new Date(movement.updatedAt) < lastMonth) {
-					return movement.amount;
+					return movement.amount.euro;
 				}
 			}
 
@@ -60,9 +60,11 @@ function getPreviousReport(movements, type) {
  * Calcul valorisation PRU = (Somme actifs en cours) - (Somme actifs à l'achat)
  */
 function getValorisation(reports) {
-	const live = sum(reports.map((report) => report.amount * report.Stock.qty));
+	const live = sum(
+		reports.map((report) => report.amount.euro * report.Stock.qty)
+	);
 	const pru = sum(
-		reports.map((report) => report.Stock.qty * report.Stock.qty)
+		reports.map((report) => report.Stock.pru.euro * report.Stock.qty)
 	);
 
 	return live - pru;
@@ -75,7 +77,7 @@ function getPreviousValorisation(reports) {
 	const live = sum(
 		reports.map((report) => {
 			if (new Date(report.updatedAt) < lastMonth) {
-				return report.amount * report.Stock.qty;
+				return report.amount.euro * report.Stock.qty;
 			}
 		})
 	);
@@ -83,7 +85,7 @@ function getPreviousValorisation(reports) {
 	const pru = sum(
 		reports.map((report) => {
 			if (new Date(report.updatedAt) < lastMonth) {
-				return report.Stock.pru * report.Stock.qty;
+				return report.Stock.pru.euro * report.Stock.qty;
 			}
 		})
 	);

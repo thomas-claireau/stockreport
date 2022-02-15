@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import { formatPrice } from './utils/functions';
 
 const ApiContext = createContext();
 
@@ -11,7 +12,13 @@ const ApiContextProvider = ({ children }) => {
 		fetch('http://localhost:3000/movements')
 			.then((response) => response.json())
 			.then((data) => {
-				return setMovements(data);
+				return setMovements(
+					data.map((movement) => ({
+						...movement,
+						amount: formatPrice(movement.amount),
+						live: formatPrice(movement.live),
+					}))
+				);
 			})
 			.catch((error) => console.error(error));
 	}, []);
@@ -21,7 +28,16 @@ const ApiContextProvider = ({ children }) => {
 		fetch('http://localhost:3000/reports')
 			.then((response) => response.json())
 			.then((data) => {
-				return setReports(data);
+				return setReports(
+					data.map((report) => ({
+						...report,
+						amount: formatPrice(report.amount),
+						Stock: {
+							...report.Stock,
+							pru: formatPrice(report.Stock.pru),
+						},
+					}))
+				);
 			})
 			.catch((error) => console.error(error));
 	}, []);
