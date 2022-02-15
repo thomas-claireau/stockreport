@@ -61,11 +61,14 @@ export default function Movement() {
 
 	return (
 		<div className={style['Movement']}>
-			{transfers.length ? (
-				<Bar options={options} data={getData(transfers, scale)} />
-			) : (
-				<div>Aucun transfert</div>
-			)}
+			<h5>Transfers</h5>
+			<div className={style['chart']}>
+				{transfers.length ? (
+					<Bar options={options} data={getData(transfers, scale)} />
+				) : (
+					<div>Aucun transfert</div>
+				)}
+			</div>
 		</div>
 	);
 }
