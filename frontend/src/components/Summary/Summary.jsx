@@ -6,8 +6,6 @@ import style from './Summary.module.scss';
 export default function Summary() {
 	const { movements, reports } = useApiContext();
 
-	console.log(reports);
-
 	return (
 		<div className={style['Summary']}>
 			<Card

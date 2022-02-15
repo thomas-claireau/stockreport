@@ -20,7 +20,7 @@ module.exports = {
 			const time = `${randomDate.getHours()}:${randomDate.getMinutes()}:${randomDate.getSeconds()}`;
 
 			date.setDate(
-				date.getDate() - faker.datatype.number({ min: i, max: MOVEMENTS })
+				date.getDate() - faker.datatype.number({ min: 1, max: MOVEMENTS })
 			);
 			const dateString = date.toISOString().substring(0, 10);
 

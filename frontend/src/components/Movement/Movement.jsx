@@ -23,11 +23,12 @@ ChartJS.register(
 );
 
 const options = {
-	responsive: true,
 	plugins: {
 		title: {
-			display: true,
-			text: 'Chart.js Bar Chart',
+			display: false,
+		},
+		legend: {
+			display: false,
 		},
 	},
 	scales: {
@@ -38,34 +39,18 @@ const options = {
 			stacked: true,
 		},
 	},
+	maintainAspectRatio: false,
 };
 
 export default function Movement() {
 	const { movements } = useApiContext();
-	const [scale, setScale] = useState(
-		localStorage.getItem('scale') || 'weekday'
-	);
-
-	const now = new Date();
-
-	switch (scale) {
-		case 'weekday':
-			now.setDate(now.getDate() - 7);
-			break;
-		default:
-			break;
-	}
+	const [scale, setScale] = useState(localStorage.getItem('scale') || 'month');
 
 	const transfers = movements.filter((movement) => {
-		if (
-			movement.MovementType.name == 'transfer' &&
-			new Date(movement.updatedAt) > now
-		) {
+		if (movement.MovementType.name == 'transfer') {
 			return movement;
 		}
 	});
-
-	console.log(getData(transfers, scale));
 
 	return (
 		<div className={style['Movement']}>
@@ -79,39 +64,76 @@ export default function Movement() {
 }
 
 function getData(data, scale) {
-	const transfers = groupBy(
-		data.map((transfer) => {
-			const scaleObj = {};
-			scaleObj[scale] = 'long';
-
-			return {
-				...transfer,
-				updatedAt: new Date(transfer.updatedAt).toLocaleString(
-					'default',
-					scaleObj
-				),
-			};
-		}),
-		'updatedAt'
-	);
+	const transfers = groupByScale(data, scale);
 
 	const dataset = [
 		{
 			label: 'Transferts',
-			backgroundColor: 'rgba(255,99,132,0.2)',
-			borderColor: 'rgba(255,99,132,1)',
+			backgroundColor: [],
+			borderColor: [],
 			borderWidth: 1,
-			hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+			hoverBackgroundColor: [],
 			data: [],
+			fill: false,
+			pointBackgroundColor: ['red'],
 		},
 	];
 
-	Object.values(transfers).forEach((transfers) => {
-		dataset[0].data.push(sum(transfers.map((transfer) => transfer.amount)));
-	});
+	for (const key in transfers) {
+		if (Object.hasOwnProperty.call(transfers, key)) {
+			const value = sum(transfers[key].map((transfer) => transfer.amount));
+
+			dataset[0].data.push({
+				x: key,
+				y: value,
+			});
+
+			// set colors
+			const positiveColor = '#2c8ef8';
+			const negativeColor = '#fa5c7c';
+
+			dataset[0].backgroundColor.push(
+				value > 0 ? positiveColor : negativeColor
+			);
+			dataset[0].borderColor.push(value > 0 ? positiveColor : negativeColor);
+			dataset[0].hoverBackgroundColor.push(
+				value > 0 ? positiveColor : negativeColor
+			);
+		}
+	}
 
 	return {
-		labels: Object.keys(transfers),
+		labels: [],
 		datasets: dataset,
 	};
+}
+
+function groupByScale(data, scale) {
+	return groupBy(
+		data
+			.map((transfer) => {
+				const scaleObj = {};
+
+				if (scale == 'week') {
+					scaleObj['day'] = '2-digit';
+					scaleObj['month'] = '2-digit';
+					scaleObj['year'] = '2-digit';
+				} else if (scale == 'month') {
+					scaleObj['month'] = '2-digit';
+					scaleObj['year'] = '2-digit';
+				} else {
+					scaleObj['year'] = 'numeric';
+				}
+
+				return {
+					...transfer,
+					date: new Date(transfer.updatedAt).toLocaleString(
+						'default',
+						scaleObj
+					),
+				};
+			})
+			.reverse(),
+		'date'
+	);
 }
