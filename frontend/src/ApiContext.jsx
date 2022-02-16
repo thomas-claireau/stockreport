@@ -6,6 +6,7 @@ const ApiContext = createContext();
 const ApiContextProvider = ({ children }) => {
 	const [movements, setMovements] = useState([]);
 	const [reports, setReports] = useState([]);
+	const [stocks, setStocks] = useState([]);
 
 	// get movements
 	useEffect(() => {
@@ -23,7 +24,7 @@ const ApiContextProvider = ({ children }) => {
 			.catch((error) => console.error(error));
 	}, []);
 
-	// get stocks
+	// get reports
 	useEffect(() => {
 		fetch('http://localhost:3000/reports')
 			.then((response) => response.json())
@@ -42,8 +43,23 @@ const ApiContextProvider = ({ children }) => {
 			.catch((error) => console.error(error));
 	}, []);
 
+	// get stocks
+	useEffect(() => {
+		fetch('http://localhost:3000/stocks')
+			.then((response) => response.json())
+			.then((data) => {
+				return setStocks(
+					data.map((stock) => ({
+						...stock,
+						pru: formatPrice(stock.pru),
+					}))
+				);
+			})
+			.catch((error) => console.error(error));
+	}, []);
+
 	return (
-		<ApiContext.Provider value={{ movements, reports }}>
+		<ApiContext.Provider value={{ movements, reports, stocks }}>
 			{children}
 		</ApiContext.Provider>
 	);
