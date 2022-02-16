@@ -1,6 +1,5 @@
-import style from './Distribution.module.scss'; 
+import style from './Distribution.module.scss';
 
-export default function Distribution() { return (
-<div className={style['Distribution']}>
-</div>
-); }
+export default function Distribution() {
+	return <div className={style['Distribution']}></div>;
+}
