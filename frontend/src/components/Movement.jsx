@@ -60,7 +60,7 @@ export default function Movement() {
 
 	return (
 		<div className="basis-2/3 dark:bg-slate-800 p-4 flex flex-col">
-			<h3 className="text-lg text-slate-500">Transfers</h3>
+			<h3 className="text-sm sm:text-lg text-slate-500">Transfers</h3>
 			<div className="mt-4 h-full">
 				{transfers.length ? (
 					<Bar options={options} data={getData(transfers, scale)} />

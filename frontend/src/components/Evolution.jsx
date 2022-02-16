@@ -1,9 +1,9 @@
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/solid';
 export default function Evolution({ value, type }) {
 	return (
-		<div className="flex items-center gap-6 mt-6">
+		<div className="flex items-center gap-3 mt-3 sm:gap-6 sm:mt-6">
 			<Percent value={value} type={type} />
-			<h5 className="text-slate-500">Depuis le mois dernier</h5>
+			<h5 className="text-slate-500 text-sm">Depuis le mois dernier</h5>
 		</div>
 	);
 }
@@ -16,9 +16,9 @@ function Percent({ value, type }) {
 			}`}
 		>
 			{value >= 0 ? (
-				<ArrowUpIcon className="w-8 h-8" />
+				<ArrowUpIcon className="w-4 h-4 sm:w-8 sm:h-8" />
 			) : (
-				<ArrowDownIcon className="w-8 h-8" />
+				<ArrowDownIcon className="w-4 h-4 sm:w-8 sm:h-8" />
 			)}
 			{value.toFixed(2)} {type}
 		</span>

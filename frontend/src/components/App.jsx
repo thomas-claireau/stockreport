@@ -12,12 +12,14 @@ export default function App() {
 			<div className="dark:bg-slate-900">
 				<Header />
 				<section className="p-6">
-					<h2 className="text-slate-200 text-3xl font-bold">Dashboard</h2>
-					<div className="mt-6 flex flex-row gap-4">
+					<h2 className="text-slate-200 text-1xl sm:text-2xl md:text-3xl font-bold">
+						Dashboard
+					</h2>
+					<div className="mt-3 sm:mt-6 flex flex-col md:flex-row gap-4">
 						<Summary />
 						<Movement />
 					</div>
-					<div className="mt-4 flex flex-row gap-4">
+					<div className="mt-4 flex flex-col md:flex-row gap-4">
 						<Valorisation />
 						<Distribution />
 					</div>

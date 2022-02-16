@@ -25,7 +25,7 @@ export default function Distribution() {
 
 	return (
 		<div className="dark:bg-slate-800 p-4 flex flex-col gap-4 basis-1/3">
-			<h3 className="text-lg text-slate-500">Répartition</h3>
+			<h3 className="text-sm sm:text-lg text-slate-500">Répartition</h3>
 			<Doughnut options={options} data={getDistribution(stocks)} />
 		</div>
 	);

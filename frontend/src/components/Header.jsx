@@ -5,7 +5,7 @@ export default function Header() {
 		<header className="dark:bg-slate-800">
 			<div className="flex justify-between items-center p-6">
 				<a href="#">
-					<h1 className="text-2xl sm:text-3xl text-slate-200">
+					<h1 className="text-1xl sm:text-2xl text-slate-200">
 						📈 StockReport
 					</h1>
 				</a>

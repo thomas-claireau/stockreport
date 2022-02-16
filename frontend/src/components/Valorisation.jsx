@@ -56,7 +56,7 @@ export default function Valorisation() {
 
 	return (
 		<div className="dark:bg-slate-800 p-4 flex flex-col gap-4 basis-2/3">
-			<h3 className="text-lg text-slate-500">Valorisation</h3>
+			<h3 className="text-sm sm:text-lg text-slate-500">Valorisation</h3>
 			<div className="mt-4 h-full">
 				{reports.length ? (
 					<Line options={options} data={getValorisation(reports, scale)} />
