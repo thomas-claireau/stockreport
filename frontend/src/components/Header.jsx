@@ -3,7 +3,7 @@ import avatar from '../assets/img/avatar.jpg';
 export default function Header() {
 	return (
 		<header className="dark:bg-slate-800">
-			<div className="flex justify-between items-center p-4">
+			<div className="flex justify-between items-center p-6">
 				<a href="#">
 					<h1 className="text-2xl sm:text-3xl text-slate-200">
 						📈 StockReport

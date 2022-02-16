@@ -17,7 +17,7 @@ export default function App() {
 						<Summary />
 						<Movement />
 					</div>
-					<div>
+					<div className="mt-4 flex flex-row gap-4">
 						<Valorisation />
 						<Distribution />
 					</div>

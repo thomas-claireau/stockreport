@@ -55,8 +55,8 @@ export default function Valorisation() {
 	const [scale, setScale] = useState(localStorage.getItem('scale') || 'month');
 
 	return (
-		<div>
-			<h5>Valorisation</h5>
+		<div className="dark:bg-slate-800 p-4 flex flex-col">
+			<h3 className="text-lg text-slate-500">Valorisation</h3>
 			<div>
 				{reports.length ? (
 					<Line options={options} data={getValorisation(reports, scale)} />
