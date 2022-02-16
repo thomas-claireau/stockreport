@@ -11,7 +11,7 @@ import {
 import { useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { useApiContext } from '../ApiContext';
-import { groupByScale, sum } from '../utils/functions';
+import { groupByDate, sum } from '../utils/functions';
 
 ChartJS.register(
 	CategoryScale,
@@ -55,7 +55,7 @@ export default function Valorisation() {
 	const [scale, setScale] = useState(localStorage.getItem('scale') || 'month');
 
 	return (
-		<div className="dark:bg-slate-800 p-4 flex flex-col">
+		<div className="dark:bg-slate-800 p-4 flex flex-col gap-4 basis-2/3">
 			<h3 className="text-lg text-slate-500">Valorisation</h3>
 			<div>
 				{reports.length ? (
@@ -72,7 +72,7 @@ export default function Valorisation() {
  * Calcul valorisation PRU = (Somme actifs en cours) - (Somme actifs à l'achat)
  */
 function getValorisation(data, scale) {
-	const reports = groupByScale(data, scale);
+	const reports = groupByDate(data, scale);
 
 	const dataset = [
 		{

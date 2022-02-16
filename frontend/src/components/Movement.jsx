@@ -10,7 +10,7 @@ import {
 import { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { useApiContext } from '../ApiContext';
-import { groupByScale, sum } from '../utils/functions';
+import { groupByDate, sum } from '../utils/functions';
 
 ChartJS.register(
 	CategoryScale,
@@ -73,7 +73,7 @@ export default function Movement() {
 }
 
 function getData(data, scale) {
-	const transfers = groupByScale(data, scale);
+	const transfers = groupByDate(data, scale);
 
 	const dataset = [
 		{

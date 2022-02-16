@@ -16,7 +16,7 @@ export function formatPrice(cent) {
 	};
 }
 
-export function groupByScale(data, scale) {
+export function groupByDate(data, scale) {
 	return groupBy(
 		data
 			.map((item) => {
