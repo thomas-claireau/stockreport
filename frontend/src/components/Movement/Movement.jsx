@@ -10,7 +10,7 @@ import {
 import { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { useApiContext } from '../../ApiContext';
-import { groupBy, sum } from '../../utils/functions';
+import { groupByScale, sum } from '../../utils/functions';
 import style from './Movement.module.scss';
 
 ChartJS.register(
@@ -84,8 +84,6 @@ function getData(data, scale) {
 			borderWidth: 1,
 			hoverBackgroundColor: [],
 			data: [],
-			fill: false,
-			pointBackgroundColor: ['red'],
 		},
 	];
 
@@ -98,10 +96,6 @@ function getData(data, scale) {
 			dataset[0].data.push({
 				x: key,
 				y: value,
-				label: 'cc',
-				Tooltip: {
-					value: value + ' €',
-				},
 			});
 
 			// set colors
@@ -122,34 +116,4 @@ function getData(data, scale) {
 		labels: [],
 		datasets: dataset,
 	};
-}
-
-function groupByScale(data, scale) {
-	return groupBy(
-		data
-			.map((transfer) => {
-				const scaleObj = {};
-
-				if (scale == 'week') {
-					scaleObj['day'] = '2-digit';
-					scaleObj['month'] = '2-digit';
-					scaleObj['year'] = '2-digit';
-				} else if (scale == 'month') {
-					scaleObj['month'] = '2-digit';
-					scaleObj['year'] = '2-digit';
-				} else {
-					scaleObj['year'] = 'numeric';
-				}
-
-				return {
-					...transfer,
-					date: new Date(transfer.updatedAt).toLocaleString(
-						'default',
-						scaleObj
-					),
-				};
-			})
-			.reverse(),
-		'date'
-	);
 }

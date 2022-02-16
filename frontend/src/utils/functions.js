@@ -15,3 +15,33 @@ export function formatPrice(cent) {
 		cent,
 	};
 }
+
+export function groupByScale(data, scale) {
+	return groupBy(
+		data
+			.map((item) => {
+				const scaleObj = {};
+
+				if (scale == 'week') {
+					scaleObj['day'] = '2-digit';
+					scaleObj['month'] = '2-digit';
+					scaleObj['year'] = '2-digit';
+				} else if (scale == 'month') {
+					scaleObj['month'] = '2-digit';
+					scaleObj['year'] = '2-digit';
+				} else {
+					scaleObj['year'] = 'numeric';
+				}
+
+				return {
+					...item,
+					date: new Date(item.updatedAt).toLocaleString(
+						'default',
+						scaleObj
+					),
+				};
+			})
+			.reverse(),
+		'date'
+	);
+}
