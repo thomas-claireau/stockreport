@@ -9,7 +9,7 @@ import Valorisation from './Valorisation';
 export default function App() {
 	return (
 		<ApiContextProvider>
-			<div>
+			<div className="bg-white dark:bg-slate-900">
 				<Header />
 				<section>
 					<h3>Dashboard</h3>
