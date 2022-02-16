@@ -1,13 +1,12 @@
-import { useApiContext } from '../../ApiContext';
-import { sum } from '../../utils/functions';
-import Card from '../Card/Card';
-import style from './Summary.module.scss';
+import { useApiContext } from '../ApiContext';
+import { sum } from '../utils/functions';
+import Card from './Card';
 
 export default function Summary() {
 	const { movements, reports } = useApiContext();
 
 	return (
-		<div className={style['Summary']}>
+		<div>
 			<Card
 				label="Evaluation totale"
 				value={getActualReport(movements, 'purchase')}

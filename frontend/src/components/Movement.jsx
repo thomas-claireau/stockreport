@@ -9,9 +9,8 @@ import {
 } from 'chart.js';
 import { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { useApiContext } from '../../ApiContext';
-import { groupByScale, sum } from '../../utils/functions';
-import style from './Movement.module.scss';
+import { groupByScale, sum } from '../utils/functions';
+import { useApiContext } from '../ApiContext';
 
 ChartJS.register(
 	CategoryScale,
@@ -60,9 +59,9 @@ export default function Movement() {
 	});
 
 	return (
-		<div className={style['Movement']}>
+		<div>
 			<h5>Transfers</h5>
-			<div className={style['chart']}>
+			<div>
 				{transfers.length ? (
 					<Bar options={options} data={getData(transfers, scale)} />
 				) : (

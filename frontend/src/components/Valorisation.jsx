@@ -10,9 +10,8 @@ import {
 } from 'chart.js';
 import { useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import { useApiContext } from '../../ApiContext';
-import { groupByScale, sum } from '../../utils/functions';
-import style from './Valorisation.module.scss';
+import { useApiContext } from '../ApiContext';
+import { groupByScale, sum } from '../utils/functions';
 
 ChartJS.register(
 	CategoryScale,
@@ -56,9 +55,9 @@ export default function Valorisation() {
 	const [scale, setScale] = useState(localStorage.getItem('scale') || 'month');
 
 	return (
-		<div className={style['Valorisation']}>
+		<div>
 			<h5>Valorisation</h5>
-			<div className={style['chart']}>
+			<div>
 				{reports.length ? (
 					<Line options={options} data={getValorisation(reports, scale)} />
 				) : (

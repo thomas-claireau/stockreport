@@ -1,12 +1,11 @@
-import Evolution from '../Evolution/Evolution';
-import style from './Card.module.scss';
+import Evolution from './Evolution';
 
 export default function Card({ label, value, lastValue }) {
 	return (
-		<div className={style['Card']}>
+		<div>
 			<div>
 				<h5>{label}</h5>
-				<span className="h4">{value.toFixed(2)} €</span>
+				<span>{value.toFixed(2)} €</span>
 			</div>
 			<Evolution value={renderDiff(value, lastValue)} type="%" />
 		</div>
