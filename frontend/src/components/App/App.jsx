@@ -1,7 +1,9 @@
 import { ApiContextProvider } from '../../ApiContext';
+import Distribution from '../Distribution/Distribution';
 import Header from '../Header/Header';
 import Movement from '../Movement/Movement';
 import Summary from '../Summary/Summary';
+import Valorisation from '../Valorisation/Valorisation';
 import style from './App.module.scss';
 
 export default function App() {
@@ -14,6 +16,10 @@ export default function App() {
 					<div>
 						<Summary />
 						<Movement />
+					</div>
+					<div>
+						<Valorisation />
+						<Distribution />
 					</div>
 				</section>
 				<section className={style['middle']}></section>
