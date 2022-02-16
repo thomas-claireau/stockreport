@@ -51,6 +51,7 @@ const ApiContextProvider = ({ children }) => {
 				return setStocks(
 					data.map((stock) => ({
 						...stock,
+						type: stock.StockType.name,
 						pru: formatPrice(stock.pru),
 					}))
 				);
