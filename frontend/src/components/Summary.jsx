@@ -6,7 +6,7 @@ export default function Summary() {
 	const { movements, reports } = useApiContext();
 
 	return (
-		<div>
+		<div className="basis-1/3 flex flex-col gap-4">
 			<Card
 				label="Evaluation totale"
 				value={getActualReport(movements, 'purchase')}

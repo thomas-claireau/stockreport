@@ -9,8 +9,8 @@ import {
 } from 'chart.js';
 import { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { groupByScale, sum } from '../utils/functions';
 import { useApiContext } from '../ApiContext';
+import { groupByScale, sum } from '../utils/functions';
 
 ChartJS.register(
 	CategoryScale,
@@ -59,7 +59,7 @@ export default function Movement() {
 	});
 
 	return (
-		<div>
+		<div className="basis-2/3">
 			<h5>Transfers</h5>
 			<div>
 				{transfers.length ? (

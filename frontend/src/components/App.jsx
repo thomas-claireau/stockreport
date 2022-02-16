@@ -9,11 +9,11 @@ import Valorisation from './Valorisation';
 export default function App() {
 	return (
 		<ApiContextProvider>
-			<div className="bg-white dark:bg-slate-900">
+			<div className="dark:bg-slate-900">
 				<Header />
-				<section>
-					<h3>Dashboard</h3>
-					<div>
+				<section className="p-6">
+					<h2 className="text-slate-200 text-3xl font-bold">Dashboard</h2>
+					<div className="mt-6 flex flex-row gap-4">
 						<Summary />
 						<Movement />
 					</div>

@@ -2,10 +2,12 @@ import Evolution from './Evolution';
 
 export default function Card({ label, value, lastValue }) {
 	return (
-		<div>
+		<div className="text-slate-200 dark:bg-slate-800 p-4">
 			<div>
-				<h5>{label}</h5>
-				<span>{value.toFixed(2)} €</span>
+				<h3 className="text-lg text-slate-500">{label}</h3>
+				<span className="inline-block text-4xl font-bold mt-4">
+					{value.toFixed(2)} €
+				</span>
 			</div>
 			<Evolution value={renderDiff(value, lastValue)} type="%" />
 		</div>
