@@ -21,12 +21,15 @@ export default function Distribution() {
 				},
 			},
 		},
+		maintainAspectRatio: false,
 	};
 
 	return (
-		<div className="dark:bg-slate-800 p-4 flex flex-col gap-4 basis-1/3">
+		<div className="dark:bg-slate-800 p-4 flex flex-col gap-4 md:basis-1/3">
 			<h3 className="text-sm sm:text-lg text-slate-500">Répartition</h3>
-			<Doughnut options={options} data={getDistribution(stocks)} />
+			<div className="mt-4 h-72 sm:h-full">
+				<Doughnut options={options} data={getDistribution(stocks)} />
+			</div>
 		</div>
 	);
 }

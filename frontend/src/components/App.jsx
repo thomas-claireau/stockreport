@@ -19,7 +19,7 @@ export default function App() {
 						<Summary />
 						<Movement />
 					</div>
-					<div className="mt-4 flex flex-col md:flex-row gap-4">
+					<div className="h-auto mt-4 flex flex-col md:flex-row gap-4 md:h-96">
 						<Valorisation />
 						<Distribution />
 					</div>
