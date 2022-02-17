@@ -5,6 +5,8 @@ import Header from './Header';
 import Movement from './Movement';
 import Summary from './Summary';
 import Valorisation from './Valorisation';
+import Stocks from './Stocks';
+import Exposure from './Exposure';
 
 export default function App() {
 	return (
@@ -22,6 +24,11 @@ export default function App() {
 					<div className="h-auto mt-4 flex flex-col md:flex-row gap-4 md:h-96">
 						<Valorisation />
 						<Distribution />
+					</div>
+					<div className="h-auto mt-4 flex flex-col md:flex-row gap-4 md:h-96">
+						<Stocks />
+						<Exposure type="geographic" />
+						<Exposure type="sector" />
 					</div>
 				</section>
 				<section></section>
