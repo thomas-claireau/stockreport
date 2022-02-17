@@ -1,12 +1,12 @@
 import { ApiContextProvider } from '../ApiContext';
 import '../App.css';
 import Distribution from './Distribution';
+import Exposure from './Exposure';
 import Header from './Header';
 import Movement from './Movement';
+import Stocks from './Stocks';
 import Summary from './Summary';
 import Valorisation from './Valorisation';
-import Stocks from './Stocks';
-import Exposure from './Exposure';
 
 export default function App() {
 	return (
@@ -25,7 +25,7 @@ export default function App() {
 						<Valorisation />
 						<Distribution />
 					</div>
-					<div className="h-auto mt-4 flex flex-col md:flex-row gap-4 md:h-96">
+					<div className="h-full mt-4 flex flex-col md:flex-row gap-4 xl:h-128">
 						<Stocks />
 						<Exposure type="geographic" />
 						<Exposure type="sector" />
