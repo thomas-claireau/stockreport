@@ -48,7 +48,7 @@ const options = {
 	maintainAspectRatio: false,
 };
 
-export default function Movement() {
+export default function Movement({ className }) {
 	const { movements } = useApiContext();
 	const [scale, setScale] = useState(localStorage.getItem('scale') || 'month');
 
@@ -59,7 +59,7 @@ export default function Movement() {
 	});
 
 	return (
-		<div className="basis-2/3 dark:bg-slate-800 p-4 flex flex-col">
+		<div className={`${className} dark:bg-slate-800 p-4 flex flex-col`}>
 			<h3 className="text-sm sm:text-lg text-slate-500">Transfers</h3>
 			<div className="mt-4 h-full">
 				{transfers.length ? (

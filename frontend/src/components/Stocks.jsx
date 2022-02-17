@@ -1,14 +1,12 @@
 import { useApiContext } from '../ApiContext';
 
-export default function Stocks() {
+export default function Stocks({ className }) {
 	const { stocks } = useApiContext();
 
-	console.log(stocks);
-
 	return (
-		<div className="dark:bg-slate-800 p-4 flex flex-col gap-4 basis-2/4">
+		<div className={`${className} dark:bg-slate-800 p-4 flex flex-col gap-4`}>
 			<h3 className="text-sm sm:text-lg text-slate-500">Liste des actifs</h3>
-			<ul className="mt-4 overflow-auto">
+			<ul className="h-96 overflow-auto divide-y divide-slate-600 xl:h-auto">
 				{stocks.map((stock) => (
 					<Stock key={stock.id} stock={stock} />
 				))}
@@ -18,14 +16,13 @@ export default function Stocks() {
 }
 
 function Stock({ stock }) {
-	console.log(stock);
 	return (
-		<li className="pb-4 flex gap-4 justify-between">
-			<div>
+		<li className="py-4 flex flex-col justify-between gap-4 sm:flex-row">
+			<div className="w-1/2">
 				<Value>{stock.name}</Value>
 				<Label>{new Date(stock.updatedAt).toLocaleDateString()}</Label>
 			</div>
-			<div class="columns-3 gap-8">
+			<div className="w-full flex justify-between gap-4 sm:w-1/2">
 				<div>
 					<Value>{stock.pru.euro} €</Value>
 					<Label>Price</Label>

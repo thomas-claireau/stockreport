@@ -2,11 +2,11 @@ import { useApiContext } from '../ApiContext';
 import { sum } from '../utils/functions';
 import Card from './Card';
 
-export default function Summary() {
+export default function Summary({ className }) {
 	const { movements, reports } = useApiContext();
 
 	return (
-		<div className="basis-1/3 flex flex-col gap-4">
+		<div className={`${className} flex flex-col gap-4`}>
 			<Card
 				label="Evaluation totale"
 				value={getActualReport(movements, 'purchase')}

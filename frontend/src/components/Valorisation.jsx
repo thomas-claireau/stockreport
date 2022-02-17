@@ -50,12 +50,12 @@ const options = {
 	maintainAspectRatio: false,
 };
 
-export default function Valorisation() {
+export default function Valorisation({ className }) {
 	const { reports } = useApiContext();
 	const [scale, setScale] = useState(localStorage.getItem('scale') || 'month');
 
 	return (
-		<div className="dark:bg-slate-800 p-4 flex flex-col gap-4 basis-2/3">
+		<div className={`${className} dark:bg-slate-800 p-4 flex flex-col gap-4`}>
 			<h3 className="text-sm sm:text-lg text-slate-500">Valorisation</h3>
 			<div className="mt-4 h-full">
 				{reports.length ? (

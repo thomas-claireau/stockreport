@@ -5,7 +5,7 @@ import { groupBy } from '../utils/functions';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export default function Distribution() {
+export default function Distribution({ className }) {
 	const { stocks } = useApiContext();
 
 	const options = {
@@ -25,7 +25,7 @@ export default function Distribution() {
 	};
 
 	return (
-		<div className="dark:bg-slate-800 p-4 flex flex-col gap-4 md:basis-1/3">
+		<div className={`${className} dark:bg-slate-800 p-4 flex flex-col gap-4`}>
 			<h3 className="text-sm sm:text-lg text-slate-500">Répartition</h3>
 			<div className="mt-4 h-72 sm:h-full">
 				<Doughnut options={options} data={getDistribution(stocks)} />
