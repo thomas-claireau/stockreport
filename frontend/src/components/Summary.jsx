@@ -78,6 +78,8 @@ function getPreviousValorisation(reports) {
 			if (new Date(report.updatedAt) < lastMonth) {
 				return report.amount.euro * report.Stock.qty;
 			}
+
+			return 0;
 		})
 	);
 
@@ -86,6 +88,8 @@ function getPreviousValorisation(reports) {
 			if (new Date(report.updatedAt) < lastMonth) {
 				return report.Stock.pru.euro * report.Stock.qty;
 			}
+
+			return 0;
 		})
 	);
 
