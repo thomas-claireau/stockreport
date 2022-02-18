@@ -23,11 +23,9 @@ exports.findAll = async (req, res) => {
 		const stockTypes = await models.StockType.findAll();
 
 		if (stockTypes.length <= 0)
-			return res
-				.status(404)
-				.json({ message: "Aucun type d'actif n'a été trouvé" });
+			res.status(404).json({ message: "Aucun type d'actif n'a été trouvé" });
 
-		return res.status(200).json(stockTypes);
+		res.status(200).json(stockTypes);
 	} catch (error) {
 		res.status(501).json(
 			{ message: error } || { message: 'Unexpected error' }
@@ -43,9 +41,9 @@ exports.findOne = async (req, res) => {
 		});
 
 		if (!stockType)
-			return res.status(404).json({ message: "Aucun type d'actif trouvé" });
+			res.status(404).json({ message: "Aucun type d'actif trouvé" });
 
-		return res.status(200).json(stockType);
+		res.status(200).json(stockType);
 	} catch (error) {
 		res.status(501).json(
 			{ message: error } || { message: 'Unexpected error' }

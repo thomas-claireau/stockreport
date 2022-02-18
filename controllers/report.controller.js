@@ -34,11 +34,9 @@ exports.findAll = async (req, res) => {
 		});
 
 		if (reports.length <= 0)
-			return res
-				.status(404)
-				.json({ message: "Aucun relevé n'a été trouvé" });
+			res.status(404).json({ message: "Aucun relevé n'a été trouvé" });
 
-		return res.status(200).json(reports);
+		res.status(200).json(reports);
 	} catch (error) {
 		res.status(501).json(
 			{ message: error } || { message: 'Unexpected error' }
@@ -62,10 +60,9 @@ exports.findOne = async (req, res) => {
 			where: { id: req.params.id },
 		});
 
-		if (!report)
-			return res.status(404).json({ message: 'Aucun relevé trouvé' });
+		if (!report) res.status(404).json({ message: 'Aucun relevé trouvé' });
 
-		return res.status(200).json(report);
+		res.status(200).json(report);
 	} catch (error) {
 		res.status(501).json(
 			{ message: error } || { message: 'Unexpected error' }

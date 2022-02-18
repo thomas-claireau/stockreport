@@ -5,7 +5,7 @@ exports.create = async (req, res) => {
 	const movementTypeBody = req.body;
 
 	try {
-		return res.status(201).json(
+		res.status(201).json(
 			await models.MovementType.create({
 				...movementTypeBody,
 			})
@@ -23,11 +23,11 @@ exports.findAll = async (req, res) => {
 		const movementTypes = await models.MovementType.findAll();
 
 		if (movementTypes.length <= 0)
-			return res
-				.status(404)
-				.json({ message: "Aucun type de mouvement n'a été trouvé" });
+			res.status(404).json({
+				message: "Aucun type de mouvement n'a été trouvé",
+			});
 
-		return res.status(200).json(movementTypes);
+		res.status(200).json(movementTypes);
 	} catch (error) {
 		res.status(501).json(
 			{ message: error } || { message: 'Unexpected error' }
@@ -43,11 +43,9 @@ exports.findOne = async (req, res) => {
 		});
 
 		if (!movementType)
-			return res
-				.status(404)
-				.json({ message: 'Aucun type de mouvement trouvé' });
+			res.status(404).json({ message: 'Aucun type de mouvement trouvé' });
 
-		return res.status(200).json(movementType);
+		res.status(200).json(movementType);
 	} catch (error) {
 		res.status(501).json(
 			{ message: error } || { message: 'Unexpected error' }
@@ -65,7 +63,7 @@ exports.update = async (req, res) => {
 			{ where: { id: req.params.id } }
 		);
 
-		return res.status(200).json({
+		res.status(200).json({
 			message: 'Les modifications ont été enregistrées',
 		});
 	} catch (error) {
@@ -82,7 +80,7 @@ exports.delete = async (req, res) => {
 			where: { id: req.params.id },
 		});
 
-		return res.status(204).end();
+		res.status(204).end();
 	} catch (error) {
 		res.status(501).json(
 			{ message: error } || { message: 'Unexpected error' }

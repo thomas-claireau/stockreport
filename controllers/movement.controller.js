@@ -10,28 +10,26 @@ exports.create = async (req, res) => {
 			where: { id: movementBody?.MovementTypeId },
 		});
 
-		if (!type)
-			return res.status(404).json({ message: 'Movement Type not found' });
+		if (!type) res.status(404).json({ message: 'Movement Type not found' });
 
 		if (type.name == models.MovementType.PURCHASE) {
 			stock = await models.Stock.findOne({
 				where: { id: movementBody?.StockId },
 			});
 
-			if (!stock)
-				return res.status(404).json({ message: 'Stock not found' });
+			if (!stock) res.status(404).json({ message: 'Stock not found' });
 
 			if (!movementBody?.qty)
-				return res.status(400).json({ message: 'Quantity is required' });
+				res.status(400).json({ message: 'Quantity is required' });
 
 			if (!movementBody?.live)
-				return res.status(400).json({ message: 'Live value is required' });
+				res.status(400).json({ message: 'Live value is required' });
 		} else {
 			movementBody.qty = null;
 			movementBody.live = null;
 		}
 
-		return res.status(201).json(
+		res.status(201).json(
 			await models.Movement.create({
 				...movementBody,
 			})
@@ -64,9 +62,9 @@ exports.findAll = async (req, res) => {
 		});
 
 		if (movements.length <= 0)
-			return res.status(404).json({ message: 'Movements not found' });
+			res.status(404).json({ message: 'Movements not found' });
 
-		return res.status(200).json(movements);
+		res.status(200).json(movements);
 	} catch (error) {
 		res.status(501).json(
 			{ message: error } || { message: 'Unexpected error' }
@@ -94,10 +92,9 @@ exports.findOne = async (req, res) => {
 			],
 		});
 
-		if (!movement)
-			return res.status(404).json({ message: 'Movement not found' });
+		if (!movement) res.status(404).json({ message: 'Movement not found' });
 
-		return res.status(200).json(movement);
+		res.status(200).json(movement);
 	} catch (error) {
 		res.status(501).json(
 			{ message: error } || { message: 'Unexpected error' }
@@ -114,29 +111,27 @@ exports.update = async (req, res) => {
 			where: { id: req.params.id },
 		});
 
-		if (!movement)
-			return res.status(404).json({ message: 'Movement not found' });
+		if (!movement) res.status(404).json({ message: 'Movement not found' });
 
 		const movementType = await models.MovementType.findOne({
 			where: { id: movementBody?.MovementTypeId || movement.MovementTypeId },
 		});
 
 		if (!movementType)
-			return res.status(404).json({ message: 'Movement Type not found' });
+			res.status(404).json({ message: 'Movement Type not found' });
 
 		if (movementType.name == models.MovementType.PURCHASE) {
 			const stock = await models.Stock.findOne({
 				where: { id: movementBody?.StockId || movement.StockId },
 			});
 
-			if (!stock)
-				return res.status(404).json({ message: 'Stock not found' });
+			if (!stock) res.status(404).json({ message: 'Stock not found' });
 
 			if (!(movementBody?.qty || movement.qty))
-				return res.status(400).json({ message: 'Quantity is required' });
+				res.status(400).json({ message: 'Quantity is required' });
 
 			if (!(movementBody?.live || movement.live))
-				return res.status(400).json({ message: 'Live value is required' });
+				res.status(400).json({ message: 'Live value is required' });
 		} else {
 			movementBody.qty = null;
 			movementBody.live = null;
@@ -167,7 +162,7 @@ exports.delete = async (req, res) => {
 			where: { id: req.params.id },
 		});
 
-		return res.status(204).end();
+		res.status(204).end();
 	} catch (error) {
 		res.status(501).json(
 			{ message: error } || { message: 'Unexpected error' }

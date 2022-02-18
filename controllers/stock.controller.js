@@ -31,9 +31,9 @@ exports.findAll = async (req, res) => {
 		});
 
 		if (stocks.length <= 0)
-			return res.status(404).json({ message: "Aucun actif n'a été trouvé" });
+			res.status(404).json({ message: "Aucun actif n'a été trouvé" });
 
-		return res.status(200).json(stocks);
+		res.status(200).json(stocks);
 	} catch (error) {
 		res.status(501).json(error || { message: 'Unexpected error' });
 	}
@@ -55,10 +55,9 @@ exports.findOne = async (req, res) => {
 			],
 		});
 
-		if (!stock)
-			return res.status(404).json({ message: 'Aucun actif trouvé' });
+		if (!stock) res.status(404).json({ message: 'Aucun actif trouvé' });
 
-		return res.status(200).json(stock);
+		res.status(200).json(stock);
 	} catch (error) {
 		res.status(501).json(error || { message: 'Unexpected error' });
 	}
