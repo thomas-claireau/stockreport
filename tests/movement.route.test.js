@@ -1,5 +1,9 @@
 const request = require('supertest');
-const app = require('../app.js');
+
+const database = require('../models/index');
+const makeApp = require('../app');
+
+const app = makeApp(database);
 
 describe('Movement API', () => {
 	it('should show all movements', async () => {

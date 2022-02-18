@@ -1,6 +1,10 @@
 // Imports
 const http = require('http');
-const app = require('./app');
+
+const database = require('./models/index');
+const makeApp = require('./app.js');
+
+const app = makeApp(database);
 
 //  Setting the port
 const normalizePort = (val) => {
