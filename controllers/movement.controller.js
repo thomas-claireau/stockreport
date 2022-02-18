@@ -161,7 +161,7 @@ exports.update = async (req, res) => {
 };
 
 // Delete a Movement with the specified id in the request
-exports.delete = async (req, res, next) => {
+exports.delete = async (req, res) => {
 	try {
 		await models.Movement.destroy({
 			where: { id: req.params.id },
