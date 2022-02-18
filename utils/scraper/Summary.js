@@ -14,8 +14,6 @@ export default class Summary {
 
 		await this._page.screenshot({ path: 'screenshots/bd-summary.png' });
 
-		console.log(typeof translator);
-
 		const scrape = await this._page.$$eval(
 			'.valGlobal table tr td b',
 			(html, translator) => {

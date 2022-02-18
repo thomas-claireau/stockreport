@@ -1,0 +1,43 @@
+{
+	"version": "2.0.0",
+
+	"tasks": [
+		{
+			"label": "new react folder and files",
+
+			"command": [
+				"rm -rf ${config:defaultPath}${input:dirName}",
+				"&& touch ${config:defaultPath}/${input:dirName}.jsx",
+
+				// write in jsx file
+				"&& echo \"\" >> ${config:defaultPath}/${input:dirName}.jsx",
+				"&& echo \"export default function ${input:dirName}() { return (\" >> ${config:defaultPath}/${input:dirName}.jsx", // export default function
+				"&& echo \"<div>\" >> ${config:defaultPath}/${input:dirName}.jsx", // <div>
+				"&& echo \"</div>\" >> ${config:defaultPath}/${input:dirName}.jsx", // </div>
+				"&& echo \"); }\" >> ${config:defaultPath}/${input:dirName}.jsx", // </div>
+			],
+
+			"type": "shell",
+			"problemMatcher": [],
+			"presentation": {
+				"echo": false,
+				"reveal": "silent",
+				"focus": false,
+				"panel": "shared",
+				"showReuseMessage": false,
+				"clear": true
+			}
+		}
+	],
+
+	// ........................................................................................
+
+	"inputs": [
+		{
+			"type": "promptString",
+			"id": "dirName",
+			"description": "Complete my folder name",
+			"default": "jsx folder to create"
+		}
+	]
+}

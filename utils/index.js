@@ -2,12 +2,10 @@
 import 'dotenv/config';
 import express from 'express';
 import puppeteer from 'puppeteer';
-import { login } from './scraper/functions.js';
 import Summary from './scraper/Summary.js';
+import { login } from './utils/scraper/functions.js.js';
 
 const app = express();
-
-app.set('view engine', 'pug');
 
 puppeteer.launch().then(async function (browser) {
 	const [page] = await browser.pages();
