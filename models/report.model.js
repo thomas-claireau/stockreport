@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
 		{
 			amount: {
 				type: DataTypes.FLOAT,
+				allowNull: false,
 			},
 		},
 		{
