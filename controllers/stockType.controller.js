@@ -23,7 +23,7 @@ exports.findAll = async (req, res) => {
 		const stockTypes = await models.StockType.findAll();
 
 		if (stockTypes.length <= 0)
-			res.status(404).json({ message: "Aucun type d'actif n'a été trouvé" });
+			res.status(404).json({ message: "Stock type not found" });
 
 		res.status(200).json(stockTypes);
 	} catch (error) {
@@ -62,7 +62,7 @@ exports.update = async (req, res) => {
 		);
 
 		res.status(200).json({
-			message: 'Les modifications ont été enregistrées',
+			message: 'Modifications was updated',
 		});
 	} catch (error) {
 		res.status(501).json(

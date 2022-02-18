@@ -24,7 +24,7 @@ exports.findAll = async (req, res) => {
 
 		if (movementTypes.length <= 0)
 			res.status(404).json({
-				message: "Aucun type de mouvement n'a été trouvé",
+				message: "Movement type not found",
 			});
 
 		res.status(200).json(movementTypes);
@@ -43,7 +43,7 @@ exports.findOne = async (req, res) => {
 		});
 
 		if (!movementType)
-			res.status(404).json({ message: 'Aucun type de mouvement trouvé' });
+			res.status(404).json({ message: 'Movement type not found' });
 
 		res.status(200).json(movementType);
 	} catch (error) {
@@ -64,7 +64,7 @@ exports.update = async (req, res) => {
 		);
 
 		res.status(200).json({
-			message: 'Les modifications ont été enregistrées',
+			message: 'Modifications was updated',
 		});
 	} catch (error) {
 		res.status(501).json(
