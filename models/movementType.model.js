@@ -2,6 +2,9 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
 	class MovementType extends Model {
+		static TRANSFER = 'transfer';
+		static PURCHASE = 'purchase';
+
 		/**
 		 * Helper method for defining associations.
 		 * This method is not a part of Sequelize lifecycle.

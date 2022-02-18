@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
 			});
 
 			Stock.hasOne(models.Report);
+			Stock.hasOne(models.Movement);
 		}
 	}
 	Stock.init(

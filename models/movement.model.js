@@ -16,6 +16,11 @@ module.exports = (sequelize, DataTypes) => {
 				onUpdate: 'CASCADE',
 				onDelete: 'CASCADE',
 			});
+
+			models.Movement.belongsTo(models.Stock, {
+				onUpdate: 'CASCADE',
+				onDelete: 'CASCADE',
+			});
 		}
 	}
 	Movement.init(
