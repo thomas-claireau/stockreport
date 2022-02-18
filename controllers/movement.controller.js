@@ -64,7 +64,7 @@ exports.findAll = async (req, res) => {
 		if (movements.length <= 0)
 			res.status(404).json({ message: 'Movements not found' });
 
-		res.status(200).json(movements);
+		res.status(200).json({movements});
 	} catch (error) {
 		res.status(501).json(
 			{ message: error } || { message: 'Unexpected error' }

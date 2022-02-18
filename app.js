@@ -60,7 +60,7 @@ if (ENV == 'development') {
 	models.sequelize.sync({ force: true }).then(() => {
 		cmd.run('sequelize db:seed:all');
 	});
-} else {
+} else if (ENV != 'test') {
 	models.sequelize.sync();
 }
 
