@@ -1,34 +1,20 @@
 'use strict';
 module.exports = {
 	async up(queryInterface, Sequelize) {
-		await queryInterface.createTable('Stocks', {
+		await queryInterface.createTable('Movements', {
 			id: {
 				allowNull: false,
 				autoIncrement: true,
 				primaryKey: true,
 				type: Sequelize.INTEGER,
 			},
-			name: {
-				type: Sequelize.STRING,
-				allowNull: false,
-			},
-			isin: {
-				type: Sequelize.STRING,
-				allowNull: false,
-			},
-			code: {
-				type: Sequelize.STRING,
-				allowNull: false,
-			},
 			qty: {
 				type: Sequelize.INTEGER,
-				allowNull: false,
 			},
-			etf: {
-				type: Sequelize.BOOLEAN,
-				allowNull: false,
+			live: {
+				type: Sequelize.FLOAT,
 			},
-			pru: {
+			amount: {
 				type: Sequelize.FLOAT,
 				allowNull: false,
 			},
@@ -40,9 +26,27 @@ module.exports = {
 				allowNull: false,
 				type: Sequelize.DATE,
 			},
+			StockId: {
+				type: Sequelize.INTEGER,
+				onUpdate: 'CASCADE',
+				onDelete: 'CASCADE',
+				references: {
+					model: 'Stocks',
+					key: 'id',
+				},
+			},
+			MovementTypeId: {
+				type: Sequelize.INTEGER,
+				onUpdate: 'CASCADE',
+				onDelete: 'CASCADE',
+				references: {
+					model: 'MovementTypes',
+					key: 'id',
+				},
+			},
 		});
 	},
 	async down(queryInterface, Sequelize) {
-		await queryInterface.dropTable('Stocks');
+		await queryInterface.dropTable('Movements');
 	},
 };

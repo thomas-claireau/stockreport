@@ -6,7 +6,16 @@
 	"scripts": {
 		"start": "cross-env NODE_ENV=development nodemon server.js",
 		"seed": "cross-env NODE_ENV=development sequelize db:seed:all",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+		"test": "cross-env NODE_ENV=test jest --testTimeout=10000",
+		"pretest": "cross-env NODE_ENV=test npm run db:reset",
+		"db:create:test": "cross-env NODE_ENV=test npx sequelize-cli db:create"
+	},
+	"jest": {
+		"testEnvironment": "node",
+		"coveragePathIgnorePatterns": [
+			"/node_modules/"
+		]
 	},
 	"repository": {
 		"type": "git",
