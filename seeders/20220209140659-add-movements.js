@@ -38,6 +38,7 @@ module.exports = {
 				movement.MovementTypeId = 1; // transfer
 			} else {
 				movement.MovementTypeId = 2; // purchase
+				movement.StockId = faker.datatype.number({ min: 1, max: 10 });
 				movement.qty = faker.datatype.number({ min: 1, max: 10 });
 				movement.live =
 					faker.datatype.float({ min: 300, max: 600 }) *
