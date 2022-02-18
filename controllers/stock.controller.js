@@ -1,85 +1,96 @@
 const models = require('../models');
 
 // Create and Save a new stock
-exports.create = (req, res) => {
-	const stockBody = req.body;
+exports.create = async (req, res) => {
+	try {
+		const stockBody = req.body;
 
-	models.Stock.create({
-		...stockBody,
-	})
-		.then((stock) => {
-			res.status(201).json({
-				...stock,
-			});
-		})
-		.catch((err) => res.status(501).json(err));
+		res.status(201).json(
+			await models.Stock.create({
+				...stockBody,
+			})
+		);
+	} catch (error) {
+		res.status(501).json(error || { message: 'Unexpected error' });
+	}
 };
 
 // Retrieve all Stocks from the database.
-exports.findAll = (req, res) => {
-	models.Stock.findAll({
-		attributes: {
-			exclude: ['StockTypeId'],
-		},
-		include: [
-			{
-				model: models.StockType,
-				attributes: ['name'],
+exports.findAll = async (req, res) => {
+	try {
+		const stocks = await models.Stock.findAll({
+			attributes: {
+				exclude: ['StockTypeId'],
 			},
-		],
-	})
-		.then((stocks) => {
-			if (stocks.length <= 0)
-				return res
-					.status(404)
-					.json({ message: "Aucun actif n'a été trouvé" });
+			include: [
+				{
+					model: models.StockType,
+					attributes: ['name'],
+				},
+			],
+		});
 
-			return res.status(200).json(stocks);
-		})
-		.catch((err) => res.status(501).json(err));
+		if (stocks.length <= 0)
+			return res.status(404).json({ message: "Aucun actif n'a été trouvé" });
+
+		return res.status(200).json(stocks);
+	} catch (error) {
+		res.status(501).json(error || { message: 'Unexpected error' });
+	}
 };
 
 // Get one stock
-exports.findOne = (req, res) => {
-	models.Stock.findOne({
-		where: { id: req.params.id },
-		attributes: {
-			exclude: ['StockTypeId'],
-		},
-		include: [
-			{
-				model: models.StockType,
-				attributes: ['name'],
+exports.findOne = async (req, res) => {
+	try {
+		const stock = await models.Stock.findOne({
+			where: { id: req.params.id },
+			attributes: {
+				exclude: ['StockTypeId'],
 			},
-		],
-	})
-		.then((stock) => {
-			if (!stock)
-				return res.status(404).json({ message: 'Aucun actif trouvé' });
+			include: [
+				{
+					model: models.StockType,
+					attributes: ['name'],
+				},
+			],
+		});
 
-			return res.status(200).json(stock);
-		})
-		.catch((err) => res.status(501).json(err));
+		if (!stock)
+			return res.status(404).json({ message: 'Aucun actif trouvé' });
+
+		return res.status(200).json(stock);
+	} catch (error) {
+		res.status(501).json(error || { message: 'Unexpected error' });
+	}
 };
 
 // Update a Stock identified by the id in the request
-exports.update = (req, res) => {
-	const stockBody = req.body;
+exports.update = async (req, res) => {
+	try {
+		const stockBody = req.body;
 
-	models.Stock.update({ ...stockBody }, { where: { id: req.params.id } })
-		.then(() =>
-			res.status(200).json({
-				message: 'Les modifications ont été enregistrées',
-			})
-		)
-		.catch((err) => res.status(501).json(err));
+		await models.Stock.update(
+			{ ...stockBody },
+			{ where: { id: req.params.id } }
+		);
+
+		res.status(200).json({
+			message: 'Les modifications ont été enregistrées',
+		});
+	} catch (error) {
+		res.status(501).json(error || { message: 'Unexpected error' });
+	}
 };
 
 // Delete a Stock with the specified id in the request
-exports.delete = (req, res, next) => {
-	models.Stock.destroy({
-		where: { id: req.params.id },
-	})
-		.then(() => res.status(204).end())
-		.catch((err) => res.status(501).json(err));
+exports.delete = async (req, res) => {
+	try {
+		await models.Stock.destroy({
+			where: { id: req.params.id },
+		});
+
+		res.status(204).end();
+	} catch (error) {
+		res.status(501).json(error || { message: 'Unexpected error' });
+	}
 };
