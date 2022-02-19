@@ -5,13 +5,13 @@ exports.create = async (req, res) => {
 	try {
 		const stockBody = req.body;
 
-		res.status(201).json(
+		return res.status(201).json(
 			await models.Stock.create({
 				...stockBody,
 			})
 		);
 	} catch (error) {
-		res.status(501).json(error || { message: 'Unexpected error' });
+		return res.status(501).json(error || { message: 'Unexpected error' });
 	}
 };
 
@@ -31,11 +31,11 @@ exports.findAll = async (req, res) => {
 		});
 
 		if (stocks.length <= 0)
-			res.status(404).json({ message: "Stock not found" });
+			return res.status(404).json({ message: 'Stock not found' });
 
-		res.status(200).json(stocks);
+		return res.status(200).json(stocks);
 	} catch (error) {
-		res.status(501).json(error || { message: 'Unexpected error' });
+		return res.status(501).json(error || { message: 'Unexpected error' });
 	}
 };
 
@@ -55,11 +55,11 @@ exports.findOne = async (req, res) => {
 			],
 		});
 
-		if (!stock) res.status(404).json({ message: 'Stock not found' });
+		if (!stock) return res.status(404).json({ message: 'Stock not found' });
 
-		res.status(200).json(stock);
+		return res.status(200).json(stock);
 	} catch (error) {
-		res.status(501).json(error || { message: 'Unexpected error' });
+		return res.status(501).json(error || { message: 'Unexpected error' });
 	}
 };
 
@@ -73,11 +73,11 @@ exports.update = async (req, res) => {
 			{ where: { id: req.params.id } }
 		);
 
-		res.status(200).json({
+		return res.status(200).json({
 			message: 'Modifications was updated',
 		});
 	} catch (error) {
-		res.status(501).json(error || { message: 'Unexpected error' });
+		return res.status(501).json(error || { message: 'Unexpected error' });
 	}
 };
 
@@ -88,8 +88,8 @@ exports.delete = async (req, res) => {
 			where: { id: req.params.id },
 		});
 
-		res.status(204).end();
+		return res.status(204).end();
 	} catch (error) {
-		res.status(501).json(error || { message: 'Unexpected error' });
+		return res.status(501).json(error || { message: 'Unexpected error' });
 	}
 };

@@ -5,15 +5,15 @@ exports.create = async (req, res) => {
 	try {
 		const stockTypeBody = req.body;
 
-		res.status(201).json(
+		return res.status(201).json(
 			await models.StockType.create({
 				...stockTypeBody,
 			})
 		);
 	} catch (error) {
-		res.status(501).json(
-			{ message: error } || { message: 'Unexpected error' }
-		);
+		return res
+			.status(501)
+			.json({ message: error } || { message: 'Unexpected error' });
 	}
 };
 
@@ -23,13 +23,13 @@ exports.findAll = async (req, res) => {
 		const stockTypes = await models.StockType.findAll();
 
 		if (stockTypes.length <= 0)
-			res.status(404).json({ message: "Stock type not found" });
+			return res.status(404).json({ message: 'Stock type not found' });
 
-		res.status(200).json(stockTypes);
+		return res.status(200).json(stockTypes);
 	} catch (error) {
-		res.status(501).json(
-			{ message: error } || { message: 'Unexpected error' }
-		);
+		return res
+			.status(501)
+			.json({ message: error } || { message: 'Unexpected error' });
 	}
 };
 
@@ -41,13 +41,13 @@ exports.findOne = async (req, res) => {
 		});
 
 		if (!stockType)
-			res.status(404).json({ message: "Aucun type d'actif trouvé" });
+			return res.status(404).json({ message: "Aucun type d'actif trouvé" });
 
-		res.status(200).json(stockType);
+		return res.status(200).json(stockType);
 	} catch (error) {
-		res.status(501).json(
-			{ message: error } || { message: 'Unexpected error' }
-		);
+		return res
+			.status(501)
+			.json({ message: error } || { message: 'Unexpected error' });
 	}
 };
 
@@ -61,13 +61,13 @@ exports.update = async (req, res) => {
 			{ where: { id: req.params.id } }
 		);
 
-		res.status(200).json({
+		return res.status(200).json({
 			message: 'Modifications was updated',
 		});
 	} catch (error) {
-		res.status(501).json(
-			{ message: error } || { message: 'Unexpected error' }
-		);
+		return res
+			.status(501)
+			.json({ message: error } || { message: 'Unexpected error' });
 	}
 };
 
@@ -78,10 +78,10 @@ exports.delete = async (req, res) => {
 			where: { id: req.params.id },
 		});
 
-		res.status(204).end();
+		return res.status(204).end();
 	} catch (error) {
-		res.status(501).json(
-			{ message: error } || { message: 'Unexpected error' }
-		);
+		return res
+			.status(501)
+			.json({ message: error } || { message: 'Unexpected error' });
 	}
 };

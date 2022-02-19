@@ -10,34 +10,36 @@ exports.create = async (req, res) => {
 			where: { id: movementBody?.MovementTypeId },
 		});
 
-		if (!type) res.status(404).json({ message: 'Movement Type not found' });
+		if (!type)
+			return res.status(404).json({ message: 'Movement Type not found' });
 
 		if (type.name == models.MovementType.PURCHASE) {
 			stock = await models.Stock.findOne({
 				where: { id: movementBody?.StockId },
 			});
 
-			if (!stock) res.status(404).json({ message: 'Stock not found' });
+			if (!stock)
+				return res.status(404).json({ message: 'Stock not found' });
 
 			if (!movementBody?.qty)
-				res.status(400).json({ message: 'Quantity is required' });
+				return res.status(400).json({ message: 'Quantity is required' });
 
 			if (!movementBody?.live)
-				res.status(400).json({ message: 'Live value is required' });
+				return res.status(400).json({ message: 'Live value is required' });
 		} else {
 			movementBody.qty = null;
 			movementBody.live = null;
 		}
 
-		res.status(201).json(
+		return res.status(201).json(
 			await models.Movement.create({
 				...movementBody,
 			})
 		);
 	} catch (error) {
-		res.status(501).json(
-			{ message: error } || { message: 'Unexpected error' }
-		);
+		return res
+			.status(501)
+			.json({ message: error } || { message: 'Unexpected error' });
 	}
 };
 
@@ -62,13 +64,13 @@ exports.findAll = async (req, res) => {
 		});
 
 		if (movements.length <= 0)
-			res.status(404).json({ message: 'Movements not found' });
+			return res.status(404).json({ message: 'Movements not found' });
 
-		res.status(200).json({movements});
+		return res.status(200).json({ movements });
 	} catch (error) {
-		res.status(501).json(
-			{ message: error } || { message: 'Unexpected error' }
-		);
+		return res
+			.status(501)
+			.json({ message: error } || { message: 'Unexpected error' });
 	}
 };
 
@@ -92,13 +94,14 @@ exports.findOne = async (req, res) => {
 			],
 		});
 
-		if (!movement) res.status(404).json({ message: 'Movement not found' });
+		if (!movement)
+			return res.status(404).json({ message: 'Movement not found' });
 
-		res.status(200).json(movement);
+		return res.status(200).json(movement);
 	} catch (error) {
-		res.status(501).json(
-			{ message: error } || { message: 'Unexpected error' }
-		);
+		return res
+			.status(501)
+			.json({ message: error } || { message: 'Unexpected error' });
 	}
 };
 
@@ -111,27 +114,29 @@ exports.update = async (req, res) => {
 			where: { id: req.params.id },
 		});
 
-		if (!movement) res.status(404).json({ message: 'Movement not found' });
+		if (!movement)
+			return res.status(404).json({ message: 'Movement not found' });
 
 		const movementType = await models.MovementType.findOne({
 			where: { id: movementBody?.MovementTypeId || movement.MovementTypeId },
 		});
 
 		if (!movementType)
-			res.status(404).json({ message: 'Movement Type not found' });
+			return res.status(404).json({ message: 'Movement Type not found' });
 
 		if (movementType.name == models.MovementType.PURCHASE) {
 			const stock = await models.Stock.findOne({
 				where: { id: movementBody?.StockId || movement.StockId },
 			});
 
-			if (!stock) res.status(404).json({ message: 'Stock not found' });
+			if (!stock)
+				return res.status(404).json({ message: 'Stock not found' });
 
 			if (!(movementBody?.qty || movement.qty))
-				res.status(400).json({ message: 'Quantity is required' });
+				return res.status(400).json({ message: 'Quantity is required' });
 
 			if (!(movementBody?.live || movement.live))
-				res.status(400).json({ message: 'Live value is required' });
+				return res.status(400).json({ message: 'Live value is required' });
 		} else {
 			movementBody.qty = null;
 			movementBody.live = null;
@@ -145,13 +150,13 @@ exports.update = async (req, res) => {
 			{ where: { id: req.params.id } }
 		);
 
-		res.status(200).json({
+		return res.status(200).json({
 			message: 'Les modifications ont été enregistrées',
 		});
 	} catch (error) {
-		res.status(501).json(
-			{ message: error } || { message: 'Unexpected error' }
-		);
+		return res
+			.status(501)
+			.json({ message: error } || { message: 'Unexpected error' });
 	}
 };
 
@@ -162,10 +167,10 @@ exports.delete = async (req, res) => {
 			where: { id: req.params.id },
 		});
 
-		res.status(204).end();
+		return res.status(204).end();
 	} catch (error) {
-		res.status(501).json(
-			{ message: error } || { message: 'Unexpected error' }
-		);
+		return res
+			.status(501)
+			.json({ message: error } || { message: 'Unexpected error' });
 	}
 };

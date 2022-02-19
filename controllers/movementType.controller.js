@@ -5,15 +5,15 @@ exports.create = async (req, res) => {
 	const movementTypeBody = req.body;
 
 	try {
-		res.status(201).json(
+		return res.status(201).json(
 			await models.MovementType.create({
 				...movementTypeBody,
 			})
 		);
 	} catch (error) {
-		res.status(501).json(
-			{ message: error } || { message: 'Unexpected error' }
-		);
+		return res
+			.status(501)
+			.json({ message: error } || { message: 'Unexpected error' });
 	}
 };
 
@@ -23,15 +23,15 @@ exports.findAll = async (req, res) => {
 		const movementTypes = await models.MovementType.findAll();
 
 		if (movementTypes.length <= 0)
-			res.status(404).json({
-				message: "Movement type not found",
+			return res.status(404).json({
+				message: 'Movement type not found',
 			});
 
-		res.status(200).json(movementTypes);
+		return res.status(200).json(movementTypes);
 	} catch (error) {
-		res.status(501).json(
-			{ message: error } || { message: 'Unexpected error' }
-		);
+		return res
+			.status(501)
+			.json({ message: error } || { message: 'Unexpected error' });
 	}
 };
 
@@ -43,13 +43,13 @@ exports.findOne = async (req, res) => {
 		});
 
 		if (!movementType)
-			res.status(404).json({ message: 'Movement type not found' });
+			return res.status(404).json({ message: 'Movement type not found' });
 
-		res.status(200).json(movementType);
+		return res.status(200).json(movementType);
 	} catch (error) {
-		res.status(501).json(
-			{ message: error } || { message: 'Unexpected error' }
-		);
+		return res
+			.status(501)
+			.json({ message: error } || { message: 'Unexpected error' });
 	}
 };
 
@@ -63,13 +63,13 @@ exports.update = async (req, res) => {
 			{ where: { id: req.params.id } }
 		);
 
-		res.status(200).json({
+		return res.status(200).json({
 			message: 'Modifications was updated',
 		});
 	} catch (error) {
-		res.status(501).json(
-			{ message: error } || { message: 'Unexpected error' }
-		);
+		return res
+			.status(501)
+			.json({ message: error } || { message: 'Unexpected error' });
 	}
 };
 
@@ -80,10 +80,10 @@ exports.delete = async (req, res) => {
 			where: { id: req.params.id },
 		});
 
-		res.status(204).end();
+		return res.status(204).end();
 	} catch (error) {
-		res.status(501).json(
-			{ message: error } || { message: 'Unexpected error' }
-		);
+		return res
+			.status(501)
+			.json({ message: error } || { message: 'Unexpected error' });
 	}
 };
