@@ -14,6 +14,9 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const hpp = require('hpp');
 
+// Express app launching
+const app = express();
+
 // Routes Imports
 const movements = require('./routes/movement.route');
 const movementTypes = require('./routes/movementType.route');
@@ -21,56 +24,51 @@ const reports = require('./routes/report.route');
 const stocks = require('./routes/stock.route');
 const stockTypes = require('./routes/stockType.route');
 
-module.exports = function (database) {
-	// Express app launching
-	const app = express();
+// Helmet middlware for safe headers
+app.use(helmet());
+app.use(cors());
 
-	// Helmet middlware for safe headers
-	app.use(helmet());
-	app.use(cors());
+// express-rate-limit middleware to limit the amount of request done
+const limiter = rateLimit({
+	windowMs: 30 * 60 * 1000,
+	max: 100,
+});
+app.use(limiter);
 
-	// express-rate-limit middleware to limit the amount of request done
-	const limiter = rateLimit({
-		windowMs: 30 * 60 * 1000,
-		max: 100,
+// Setting CORS headers
+app.use((req, res, next) => {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader(
+		'Access-Control-Allow-Headers',
+		'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization, Content-Type, Access-Control-Allow-Headers'
+	);
+	res.setHeader(
+		'Access-Control-Allow-Methods',
+		'GET, POST, PUT, DELETE, PATCH, OPTIONS'
+	);
+	next();
+});
+
+// Parsing req
+app.use(express.json());
+
+// Security
+app.use(hpp()); // HPP middleware to protect against HTTP parameter pollution attacks
+
+// sync models
+if (ENV == 'development') {
+	models.sequelize.sync({ force: true }).then(() => {
+		cmd.run('sequelize db:seed:all');
 	});
-	app.use(limiter);
+} else if (ENV != 'test') {
+	models.sequelize.sync();
+}
 
-	// Setting CORS headers
-	app.use((req, res, next) => {
-		res.setHeader('Access-Control-Allow-Origin', '*');
-		res.setHeader(
-			'Access-Control-Allow-Headers',
-			'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization, Content-Type, Access-Control-Allow-Headers'
-		);
-		res.setHeader(
-			'Access-Control-Allow-Methods',
-			'GET, POST, PUT, DELETE, PATCH, OPTIONS'
-		);
-		next();
-	});
+// Setting routes
+app.use('/movements', movements);
+app.use('/movement-types', movementTypes);
+app.use('/reports', reports);
+app.use('/stocks', stocks);
+app.use('/stock-types', stockTypes);
 
-	// Parsing req
-	app.use(express.json());
-
-	// Security
-	app.use(hpp()); // HPP middleware to protect against HTTP parameter pollution attacks
-
-	// sync models
-	if (ENV == 'development') {
-		models.sequelize.sync({ force: true }).then(() => {
-			cmd.run('sequelize db:seed:all');
-		});
-	} else if (ENV != 'test') {
-		models.sequelize.sync();
-	}
-
-	// Setting routes
-	app.use('/movements', movements);
-	app.use('/movement-types', movementTypes);
-	app.use('/reports', reports);
-	app.use('/stocks', stocks);
-	app.use('/stock-types', stockTypes);
-
-	return app;
-};
+module.exports = app;
