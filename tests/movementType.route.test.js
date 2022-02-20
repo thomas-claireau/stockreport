@@ -11,7 +11,7 @@ const faker = require('@faker-js/faker').faker;
 describe('Movement Type API', () => {
 	// Clear db and run migrations
 	beforeEach(async () => {
-		await db.Movement.sync({ force: true });
+		await db.MovementType.sync({ force: true });
 
 		const types = ['transfer', 'purchase', 'sale', 'dividend', 'split'];
 		const date = new Date().toISOString().substring(0, 10);
