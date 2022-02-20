@@ -1,0 +1,55 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [main, dev]
+
+env:
+  DB_USERNAME: mysql
+  DB_PASSWORD: mysql
+  DB_NAME: testing
+  DB_HOST: localhost
+  DB_DIALECT: mysql
+  NODE_ENV: test
+
+jobs:
+  Any-Commits:
+    runs-on: ubuntu-18.04
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_DATABASE: testing
+          MYSQL_USER: mysql
+          MYSQL_PASSWORD: mysql
+          MYSQL_ROOT_PASSWORD: mysql
+        ports:
+          - 33306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 15.x]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: main # branch name on which this CI will run
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: |
+          touch .env
+          echo "DB_USERNAME=${DB_USERNAME}" >> .env
+          echo "DB_PASSWORD=${DB_PASSWORD}" >> .env
+          echo "DB_NAME=${DB_NAME}" >> .env
+          echo "DB_HOST=${DB_HOST}" >> .env
+          echo "DB_DIALECT=${DB_DIALECT}" >> .env
+          echo "NODE_ENV=${NODE_ENV}" >> .env
+
+      - run: sudo npm install --unsafe-perm
+      - run: sudo npm run test
