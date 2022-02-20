@@ -1,7 +1,12 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
 name: Node.js CI
 
 on:
   push:
+    branches: [main, dev]
+  pull_request:
     branches: [main, dev]
 
 env:
@@ -9,12 +14,11 @@ env:
   DB_PASSWORD: mysql
   DB_NAME: testing
   DB_HOST: localhost
-  DB_DIALECT: mysql
   NODE_ENV: test
 
 jobs:
-  Any-Commits:
-    runs-on: ubuntu-18.04
+  build:
+    runs-on: ubuntu-latest
 
     services:
       mysql:
@@ -25,31 +29,28 @@ jobs:
           MYSQL_PASSWORD: mysql
           MYSQL_ROOT_PASSWORD: mysql
         ports:
-          - 33306:3306
+          - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [14.x, 16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
       - uses: actions/checkout@v2
-        with:
-          ref: main # branch name on which this CI will run
-
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-
+          cache: "npm"
       - run: |
           touch .env
           echo "DB_USERNAME=${DB_USERNAME}" >> .env
           echo "DB_PASSWORD=${DB_PASSWORD}" >> .env
           echo "DB_NAME=${DB_NAME}" >> .env
           echo "DB_HOST=${DB_HOST}" >> .env
-          echo "DB_DIALECT=${DB_DIALECT}" >> .env
           echo "NODE_ENV=${NODE_ENV}" >> .env
-
-      - run: sudo npm install --unsafe-perm
-      - run: sudo npm run test
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
