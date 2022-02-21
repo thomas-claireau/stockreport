@@ -1,16 +1,10 @@
 'use strict';
 
+const { Seed } = require('../utils/seed');
+
 module.exports = {
 	async up(queryInterface, Sequelize) {
-		const types = ['action', 'obligation', 'sicav', 'fcp'];
-		const date = new Date().toISOString().substring(0, 10);
-
-		queryInterface.bulkInsert(
-			'StockTypes',
-			types.map((type) => {
-				return { name: type, createdAt: date, updatedAt: date };
-			})
-		);
+		new Seed(queryInterface).stockType();
 	},
 
 	async down(queryInterface, Sequelize) {

@@ -23,6 +23,7 @@ const movementTypes = require('./routes/movementType.route');
 const reports = require('./routes/report.route');
 const stocks = require('./routes/stock.route');
 const stockTypes = require('./routes/stockType.route');
+const { Seed } = require('./utils/Seed');
 
 // Helmet middlware for safe headers
 app.use(helmet());
@@ -57,9 +58,9 @@ app.use(hpp()); // HPP middleware to protect against HTTP parameter pollution at
 
 // sync models
 if (ENV == 'development') {
-	models.sequelize.sync({ force: true }).then(() => {
-		cmd.run('sequelize db:seed:all');
-	});
+	models.sequelize
+		.sync({ force: true })
+		.then(() => new Seed(models.sequelize.getQueryInterface()).run());
 } else if (ENV != 'test') {
 	models.sequelize.sync();
 }

@@ -1,16 +1,10 @@
 'use strict';
 
+const { Seed } = require('../utils/seed');
+
 module.exports = {
 	async up(queryInterface, Sequelize) {
-		const types = ['transfer', 'purchase', 'sale', 'dividend', 'split'];
-		const date = new Date().toISOString().substring(0, 10);
-
-		queryInterface.bulkInsert(
-			'MovementTypes',
-			types.map((type) => {
-				return { name: type, createdAt: date, updatedAt: date };
-			})
-		);
+		new Seed(queryInterface).movementType();
 	},
 
 	async down(queryInterface, Sequelize) {
