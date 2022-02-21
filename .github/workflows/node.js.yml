@@ -53,4 +53,4 @@ jobs:
           echo "NODE_ENV=${NODE_ENV}" >> .env
       - run: npm ci
       - run: npm run build --if-present
-      - run: npm test -- --silent
+      - run: npm test

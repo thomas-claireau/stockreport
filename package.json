@@ -6,12 +6,15 @@
 	"scripts": {
 		"start": "cross-env NODE_ENV=development nodemon server.js",
 		"seed": "cross-env NODE_ENV=development sequelize db:seed:all",
-		"test": "cross-env NODE_ENV=test jest --runInBand --detectOpenHandles --forceExit"
+		"test": "cross-env NODE_ENV=test jest --runInBand --detectOpenHandles --forceExit --coverage"
 	},
 	"jest": {
 		"testEnvironment": "node",
 		"coveragePathIgnorePatterns": [
 			"/node_modules/"
+		],
+		"setupFilesAfterEnv": [
+			"jest-extended/all"
 		]
 	},
 	"repository": {
@@ -29,6 +32,7 @@
 		"@faker-js/faker": "^6.0.0-alpha.5",
 		"cross-env": "^7.0.3",
 		"jest": "^27.5.1",
+		"jest-extended": "^2.0.0",
 		"nodemon": "^2.0.15",
 		"supertest": "^6.2.2"
 	},

@@ -29,6 +29,7 @@ exports.create = async (req, res) => {
 		} else {
 			movementBody.qty = null;
 			movementBody.live = null;
+			movementBody.StockId = null;
 		}
 
 		return res.status(201).json(
@@ -66,7 +67,7 @@ exports.findAll = async (req, res) => {
 		if (movements.length <= 0)
 			return res.status(404).json({ message: 'Movements not found' });
 
-		return res.status(200).json({ movements });
+		return res.status(200).json(movements);
 	} catch (error) {
 		return res
 			.status(501)
@@ -151,7 +152,7 @@ exports.update = async (req, res) => {
 		);
 
 		return res.status(200).json({
-			message: 'Les modifications ont été enregistrées',
+			message: 'Modifications was updated',
 		});
 	} catch (error) {
 		return res
