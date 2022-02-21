@@ -10,22 +10,34 @@ const request = supertest(app);
 describe('Movement Types API', () => {
 	// Clear db and run migrations
 	beforeEach(async () => {
-		await models.sequelize
-			.sync({ force: true })
-			.then(() => new Seed(models.sequelize.getQueryInterface()).run());
+		try {
+			await models.sequelize
+				.sync({ force: true })
+				.then(() => new Seed(models.sequelize.getQueryInterface()).run());
+		} catch (error) {
+			console.log(error);
+		}
 	});
 
 	describe('GET /movement-types', () => {
 		it('should show all movement types', async () => {
-			const res = await request.get('/movement-types');
-			expect(res.statusCode).toEqual(200);
+			try {
+				const res = await request.get('/movement-types');
+				expect(res.statusCode).toEqual(200);
+			} catch (error) {
+				console.log(error);
+			}
 		});
 	});
 
 	describe('GET /movement-types/:id', () => {
 		it('should show one movement type', async () => {
-			const res = await request.get('/movement-types/1');
-			expect(res.statusCode).toEqual(200);
+			try {
+				const res = await request.get('/movement-types/1');
+				expect(res.statusCode).toEqual(200);
+			} catch (error) {
+				console.log(error);
+			}
 		});
 	});
 });
