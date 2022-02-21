@@ -3,11 +3,9 @@
 const supertest = require('supertest');
 const app = require('../../app.js');
 const models = require('../../models');
-const Seed = require('../../utils/seed.js');
+const Seed = require('../../utils/Seed');
 
 const request = supertest(app);
-
-const faker = require('@faker-js/faker').faker;
 
 describe('Movement Types API', () => {
 	// Clear db and run migrations
