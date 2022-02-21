@@ -3,7 +3,7 @@
 const supertest = require('supertest');
 const app = require('../../app.js');
 const models = require('../../models');
-const { Seed } = require('../../utils/seed.js');
+const Seed = require('../../utils/seed.js');
 
 const request = supertest(app);
 

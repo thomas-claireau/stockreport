@@ -23,7 +23,7 @@ const movementTypes = require('./routes/movementType.route');
 const reports = require('./routes/report.route');
 const stocks = require('./routes/stock.route');
 const stockTypes = require('./routes/stockType.route');
-const { Seed } = require('./utils/Seed');
+const Seed = require('./utils/Seed');
 
 // Helmet middlware for safe headers
 app.use(helmet());

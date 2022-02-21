@@ -1,6 +1,6 @@
 const faker = require('@faker-js/faker').faker;
 
-exports.Seed = class {
+module.exports = class Seed {
 	constructor(sequelize, test = false) {
 		this.sequelize = sequelize;
 		this.test = test;
