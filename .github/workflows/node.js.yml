@@ -12,7 +12,7 @@ on:
 env:
   DB_USERNAME: mysql
   DB_PASSWORD: mysql
-  DB_NAME: stockreport_test
+  DB_TEST_NAME: stockreport_test
   DB_HOST: localhost
   NODE_ENV: test
 
