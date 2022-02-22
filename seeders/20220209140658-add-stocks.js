@@ -3,11 +3,11 @@
 const Seed = require('../utils/Seed');
 
 module.exports = {
-	async up(queryInterface, Sequelize) {
-		new Seed(queryInterface).stock();
-	},
+  async up(queryInterface, Sequelize) {
+    new Seed(queryInterface).stock();
+  },
 
-	async down(queryInterface, Sequelize) {
-		await queryInterface.bulkDelete('Stocks', null, {});
-	},
+  async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete('Stocks', null, {});
+  },
 };
