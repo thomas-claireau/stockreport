@@ -16,6 +16,11 @@
     ],
     "setupFilesAfterEnv": [
       "jest-extended/all"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "clover"
     ]
   },
   "husky": {
