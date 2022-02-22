@@ -6,7 +6,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development nodemon server.js",
     "seed": "cross-env NODE_ENV=development sequelize db:seed:all",
-    "test": "cross-env NODE_ENV=test jest --runInBand --detectOpenHandles --forceExit"
+    "test": "cross-env NODE_ENV=test jest --runInBand --detectOpenHandles --forceExit",
+    "prepare": "husky install"
   },
   "jest": {
     "testEnvironment": "node",
@@ -23,7 +24,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx}": [
+    "*.js": [
       "prettier --write",
       "eslint --fix",
       "git add"
