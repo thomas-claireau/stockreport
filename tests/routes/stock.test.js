@@ -152,7 +152,7 @@ describe('Stocks API', () => {
 			expect(res.statusCode).toEqual(204);
 		});
 
-		it('should delete one movement', async () => {
+		it('should delete one stock', async () => {
 			await request.delete('/stocks/1');
 			const stock = await models.Stock.findByPk(1);
 
