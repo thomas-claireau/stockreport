@@ -42,7 +42,7 @@ describe('Reports API', () => {
 			expect(res.statusCode).toEqual(200);
 		});
 
-		it('should show one stock', async () => {
+		it('should show one report', async () => {
 			const res = await request.get('/reports/1');
 
 			expect(res.body).toEqual(
@@ -74,7 +74,7 @@ describe('Reports API', () => {
 			expect(report.StockId).toEqual(body.StockId);
 		});
 
-		it('should send created stock', async () => {
+		it('should send created report', async () => {
 			const res = await request.post('/reports').send(body);
 
 			expect(res.body).toMatchObject(body);
