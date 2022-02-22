@@ -56,11 +56,11 @@ app.use(express.json());
 app.use(hpp()); // HPP middleware to protect against HTTP parameter pollution attacks
 
 // sync models
-if (ENV == 'development') {
+if (ENV === 'development') {
   models.sequelize
     .sync({ force: true })
     .then(() => new Seed(models.sequelize.getQueryInterface()).run());
-} else if (ENV != 'test') {
+} else if (ENV !== 'test') {
   models.sequelize.sync();
 }
 
