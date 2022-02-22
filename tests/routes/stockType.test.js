@@ -78,7 +78,7 @@ describe('Stock Types API', () => {
 		});
 	});
 
-	describe('PUT /stock-types', () => {
+	describe('PUT /stock-types/:id', () => {
 		const body = {
 			name: 'Update Stock Type',
 		};

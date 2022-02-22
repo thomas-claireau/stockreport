@@ -78,7 +78,7 @@ describe('Movement Types API', () => {
 		});
 	});
 
-	describe('PUT /movement-types', () => {
+	describe('PUT /movement-types/:id', () => {
 		const body = {
 			name: 'Update Movement Type',
 		};

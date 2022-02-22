@@ -170,7 +170,7 @@ describe('Movements API', () => {
 		});
 	});
 
-	describe('PUT /movements', () => {
+	describe('PUT /movements/:id', () => {
 		const body = {
 			amount: 8000,
 		};
@@ -217,7 +217,6 @@ describe('Movements API', () => {
 			expect(movement.qty).toBeNull();
 			expect(movement.StockId).toBeNull();
 		});
-		it('should update one purchase movement to transfer movement', async () => {});
 
 		it('should send confirmation message', async () => {
 			const res = await request.put('/movements/1').send(body);
