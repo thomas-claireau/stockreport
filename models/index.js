@@ -6,7 +6,8 @@ const Sequelize = require('sequelize');
 
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.js')[env]; // eslint-disable-line
+// eslint-disable-next-line
+const config = require(__dirname + '/../config/config.js')[env];
 const db = {};
 
 let sequelize;
@@ -28,8 +29,12 @@ fs.readdirSync(__dirname)
     );
   })
   .forEach(file => {
-    const model = require(path.join(__dirname, file)); // eslint-disable-line
-    db[model(sequelize, Sequelize.DataTypes).name] = model;
+    // eslint-disable-next-line
+    const model = require(path.join(__dirname, file))(
+      sequelize,
+      Sequelize.DataTypes,
+    );
+    db[model.name] = model;
   });
 
 Object.keys(db).forEach(modelName => {
