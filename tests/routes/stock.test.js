@@ -29,7 +29,6 @@ describe('Stocks API', () => {
         expect.arrayContaining([
           expect.objectContaining({
             name: expect.any(String),
-            isin: expect.any(String),
             code: expect.any(String),
             qty: expect.any(Number),
             etf: expect.any(Boolean),
@@ -53,7 +52,6 @@ describe('Stocks API', () => {
       expect(res.body).toEqual(
         expect.objectContaining({
           name: expect.any(String),
-          isin: expect.any(String),
           code: expect.any(String),
           qty: expect.any(Number),
           etf: expect.any(Boolean),
@@ -68,7 +66,6 @@ describe('Stocks API', () => {
     const body = {
       name: 'test-stock',
       pru: 3000,
-      isin: 'FR00',
       code: 'code',
       qty: 3,
       etf: false,
@@ -87,7 +84,6 @@ describe('Stocks API', () => {
 
       expect(stock.name).toEqual(body.name);
       expect(stock.pru).toEqual(body.pru);
-      expect(stock.isin).toEqual(body.isin);
       expect(stock.code).toEqual(body.code);
       expect(stock.qty).toEqual(body.qty);
       expect(stock.etf).toEqual(body.etf);

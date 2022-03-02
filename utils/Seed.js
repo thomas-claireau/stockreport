@@ -51,7 +51,6 @@ module.exports = class Seed {
 
         data.push({
           name: faker.finance.currencyName(),
-          isin: 'FR00001234',
           code: 'PAASI',
           StockTypeId: faker.datatype.number({ min: 1, max: 4 }),
           qty: faker.datatype.number({ min: 1, max: 50 }),

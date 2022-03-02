@@ -29,10 +29,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      isin: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
       code: {
         type: DataTypes.STRING,
         allowNull: false,
