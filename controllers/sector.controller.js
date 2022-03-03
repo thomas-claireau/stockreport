@@ -1,13 +1,13 @@
 const models = require('../models');
 
-// Create and Save a new stockType
+// Create and Save a new sector
 exports.create = async (req, res) => {
   try {
-    const stockTypeBody = req.body;
+    const sectorBody = req.body;
 
     return res.status(201).json(
-      await models.StockType.create({
-        ...stockTypeBody,
+      await models.Sector.create({
+        ...sectorBody,
       }),
     );
   } catch (error) {
@@ -17,15 +17,15 @@ exports.create = async (req, res) => {
   }
 };
 
-// Retrieve all StockTypes from the database.
+// Retrieve all Sectors from the database.
 exports.findAll = async (req, res) => {
   try {
-    const stockTypes = await models.StockType.findAll();
+    const sectors = await models.Sector.findAll();
 
-    if (stockTypes.length <= 0)
-      return res.status(404).json({ message: 'Stock type not found' });
+    if (sectors.length <= 0)
+      return res.status(404).json({ message: 'Sector not found' });
 
-    return res.status(200).json(stockTypes);
+    return res.status(200).json(sectors);
   } catch (error) {
     return res
       .status(501)
@@ -33,17 +33,16 @@ exports.findAll = async (req, res) => {
   }
 };
 
-// Get one stockType
+// Get one sector
 exports.findOne = async (req, res) => {
   try {
-    const stockType = await models.StockType.findOne({
+    const sector = await models.Sector.findOne({
       where: { id: req.params.id },
     });
 
-    if (!stockType)
-      return res.status(404).json({ message: 'Stock type not found' });
+    if (!sector) return res.status(404).json({ message: 'Sector not found' });
 
-    return res.status(200).json(stockType);
+    return res.status(200).json(sector);
   } catch (error) {
     return res
       .status(501)
@@ -51,13 +50,13 @@ exports.findOne = async (req, res) => {
   }
 };
 
-// Update a StockType identified by the id in the request
+// Update a Sector identified by the id in the request
 exports.update = async (req, res) => {
   try {
-    const stockTypeBody = req.body;
+    const sectorBody = req.body;
 
-    await models.StockType.update(
-      { ...stockTypeBody },
+    await models.Sector.update(
+      { ...sectorBody },
       { where: { id: req.params.id } },
     );
 
@@ -71,10 +70,10 @@ exports.update = async (req, res) => {
   }
 };
 
-// Delete a StockType with the specified id in the request
+// Delete a Sector with the specified id in the request
 exports.delete = async (req, res) => {
   try {
-    await models.StockType.destroy({
+    await models.Sector.destroy({
       where: { id: req.params.id },
     });
 

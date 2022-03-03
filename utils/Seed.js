@@ -8,11 +8,49 @@ module.exports = class Seed {
 
   async run() {
     try {
+      await this.sector();
       await this.stockType();
       await this.stock();
       await this.movementType();
       await this.movement();
       await this.report();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async sector() {
+    try {
+      const sectors = [
+        'Industry',
+        'Technology',
+        'Healthcare',
+        'Financial',
+        'Energy',
+        'Consumer',
+        'Basic Materials',
+        'Utilities',
+        'Communication Services',
+        'Consumer Cyclical',
+        'Consumer Defensive',
+        'Energy',
+        'Financial',
+        'Healthcare',
+        'Industrial',
+        'Technology',
+        'Utilities',
+      ];
+      const date = new Date().toISOString().substring(0, 10);
+
+      const data = sectors.map(sector => {
+        return { name: sector, createdAt: date, updatedAt: date };
+      });
+
+      if (this.test) {
+        await this.sequelize.bulkCreate('Sectors', data);
+      } else {
+        await this.sequelize.bulkInsert('Sectors', data);
+      }
     } catch (error) {
       console.log(error);
     }
