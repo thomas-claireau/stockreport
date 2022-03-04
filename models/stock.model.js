@@ -18,10 +18,6 @@ module.exports = (sequelize, DataTypes) => {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       });
-
-      Stock.hasOne(models.Report);
-      Stock.hasOne(models.Movement);
-      Stock.hasOne(models.SectorExposure);
     }
   }
   Stock.init(

@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      MovementType.hasOne(models.Movement);
     }
   }
   MovementType.init(
