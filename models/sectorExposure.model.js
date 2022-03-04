@@ -3,7 +3,7 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Stock extends Model {
+  class SectorExposure extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,46 +11,33 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.Stock.belongsTo(models.StockType, {
+      models.SectorExposure.belongsTo(models.Sector, {
         foreignKey: {
           allowNull: false,
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       });
-
-      Stock.hasOne(models.Report);
-      Stock.hasOne(models.Movement);
-      Stock.hasOne(models.SectorExposure);
+      models.SectorExposure.belongsTo(models.Stock, {
+        foreignKey: {
+          allowNull: false,
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      });
     }
   }
-  Stock.init(
+  SectorExposure.init(
     {
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      code: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      qty: {
+      percent: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      etf: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-      },
-      pru: {
-        type: DataTypes.FLOAT,
         allowNull: false,
       },
     },
     {
       sequelize,
-      modelName: 'Stock',
+      modelName: 'SectorExposure',
     },
   );
-  return Stock;
+  return SectorExposure;
 };

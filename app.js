@@ -23,6 +23,7 @@ const reports = require('./routes/report.route');
 const stocks = require('./routes/stock.route');
 const stockTypes = require('./routes/stockType.route');
 const sectors = require('./routes/sector.route');
+const sectorExposures = require('./routes/sectorExposure.route');
 const Seed = require('./utils/Seed');
 
 // Helmet middlware for safe headers
@@ -72,5 +73,6 @@ app.use('/reports', reports);
 app.use('/stocks', stocks);
 app.use('/stock-types', stockTypes);
 app.use('/sectors', sectors);
+app.use('/sector-exposures', sectorExposures);
 
 module.exports = app;

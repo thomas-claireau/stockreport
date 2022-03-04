@@ -1,4 +1,5 @@
 const faker = require('@faker-js/faker').faker;
+const models = require('../models');
 
 module.exports = class Seed {
   constructor(sequelize, test = false) {
@@ -11,6 +12,7 @@ module.exports = class Seed {
       await this.sector();
       await this.stockType();
       await this.stock();
+      await this.sectorExposure();
       await this.movementType();
       await this.movement();
       await this.report();
@@ -54,6 +56,60 @@ module.exports = class Seed {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async sectorExposure() {
+    try {
+      const stocks = await models.Stock.findAll();
+      const sectors = await models.Sector.findAll();
+      const date = new Date().toISOString().substring(0, 10);
+
+      const data = [];
+
+      stocks.forEach(stock => {
+        const exposures = this.getPercents(sectors);
+
+        exposures.forEach(exposure => {
+          const sector =
+            sectors[faker.datatype.number({ min: 0, max: sectors.length - 1 })];
+
+          data.push({
+            StockId: stock.id,
+            SectorId: sector.id,
+            percent: exposure,
+            createdAt: date,
+            updatedAt: date,
+          });
+        });
+      });
+
+      if (this.test) {
+        await this.sequelize.bulkCreate('SectorExposures', data);
+      } else {
+        await this.sequelize.bulkInsert('SectorExposures', data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  getPercents(array) {
+    let full = 100;
+    const percents = [];
+
+    for (let i = 0; i < array.length; i++) {
+      const percent = Math.floor(Math.random() * (full + 1));
+      full -= percent;
+      percents.push(percent);
+    }
+
+    const sum = percents.reduce((a, b) => a + b);
+
+    if (sum < 100) {
+      percents[percents.length - 1] += 100 - sum;
+    }
+
+    return percents.filter(percent => percent !== 0);
   }
 
   async stockType() {
